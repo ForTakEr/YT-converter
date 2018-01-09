@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Free_Tärn_YouTube_converter
 {
@@ -20,6 +21,10 @@ namespace Free_Tärn_YouTube_converter
             FormatList.Items.Add("Mp4");
             FormatList.Items.Add("m4a");
             FormatList.Items.Add("webm");
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = @"C:\Users\opilane\Documents\GitHub\YT-converter\Free Tärn YouTube converter\youtube-dl.exe";
+            startInfo.Arguments = "-f 140 https://www.youtube.com/watch?v=H5dn5OA6o5k";
+            Process.Start(startInfo);
         }
 
         private void FormatList_SelectedIndexChanged(object sender, EventArgs e)
