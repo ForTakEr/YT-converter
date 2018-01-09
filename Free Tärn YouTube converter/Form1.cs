@@ -15,6 +15,24 @@ namespace Free_Tärn_YouTube_converter
         public Form1()
         {
             InitializeComponent();
+            FormatList.Items.Add("Mp4");
+            FormatList.Items.Add("m4a");
+            FormatList.Items.Add("webm");
+        }
+
+        private void FormatList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LinkBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Tõmba_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

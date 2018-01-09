@@ -42,6 +42,7 @@
             this.FormatList.Name = "FormatList";
             this.FormatList.Size = new System.Drawing.Size(121, 21);
             this.FormatList.TabIndex = 0;
+            this.FormatList.SelectedIndexChanged += new System.EventHandler(this.FormatList_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -60,6 +61,7 @@
             this.Tõmba.TabIndex = 2;
             this.Tõmba.Text = "Tõmba";
             this.Tõmba.UseVisualStyleBackColor = true;
+            this.Tõmba.Click += new System.EventHandler(this.Tõmba_Click);
             // 
             // LinkBox
             // 
@@ -67,6 +69,7 @@
             this.LinkBox.Name = "LinkBox";
             this.LinkBox.Size = new System.Drawing.Size(186, 20);
             this.LinkBox.TabIndex = 3;
+            this.LinkBox.TextChanged += new System.EventHandler(this.LinkBox_TextChanged);
             // 
             // label2
             // 
