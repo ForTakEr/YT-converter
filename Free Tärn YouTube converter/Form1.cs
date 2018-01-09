@@ -60,10 +60,6 @@ namespace Free_Tärn_YouTube_converter
             };
             proc.Start();
             kõik = proc.StandardOutput.ReadToEnd();
-            while (!proc.StandardOutput.EndOfStream)
-            {
-                string line = proc.StandardOutput.ReadLine();
-            }
             proc.WaitForExit();
             FormatList.Text = kõik;
         }
