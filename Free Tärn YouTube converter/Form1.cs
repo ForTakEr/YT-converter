@@ -15,6 +15,8 @@ namespace Free_Tärn_YouTube_converter
     {
         public string formaat;
         public string link;
+        public int index;
+        public string kõik;
 
         public Form1()
         {
@@ -27,6 +29,19 @@ namespace Free_Tärn_YouTube_converter
         private void FormatList_SelectedIndexChanged(object sender, EventArgs e)
         {
             formaat = Convert.ToString(FormatList.SelectedItem);
+
+            if (formaat == "Mp4")
+            {
+                index = 137;
+            }
+            if (formaat == "m4a")
+            {
+                index = 140;
+            }
+            if (formaat == "webm")
+            {
+                index = 248;
+            }
         }
 
         private void LinkBox_TextChanged(object sender, EventArgs e)
@@ -44,21 +59,30 @@ namespace Free_Tärn_YouTube_converter
                 }
             };
             proc.Start();
+            kõik = proc.StandardOutput.ReadToEnd();
             while (!proc.StandardOutput.EndOfStream)
             {
                 string line = proc.StandardOutput.ReadLine();
             }
+            proc.WaitForExit();
+            FormatList.Text = kõik;
         }
 
         private void Tõmba_Click(object sender, EventArgs e)
         {
             ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = @"C:\Users\opilane\Documents\GitHub\YT-converter\Free Tärn YouTube converter\youtube-dl.exe";
-            startInfo.Arguments = "-f " + formaat + link;
             startInfo.UseShellExecute = false;
             startInfo.CreateNoWindow = true;
+            startInfo.FileName = @"C:\Users\opilane\Documents\GitHub\YT-converter\Free Tärn YouTube converter\youtube-dl.exe";
+            startInfo.Arguments = "-f " + index + " " + link;
             Process.Start(startInfo);
             MessageBox.Show("Video on convertitud");
+        }
+
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            LinkBox.Text = "";
+            FormatList.Text = "";
         }
     }
 }
