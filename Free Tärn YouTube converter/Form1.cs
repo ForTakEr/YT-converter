@@ -14,6 +14,7 @@ namespace Free_Tärn_YouTube_converter
     public partial class Form1 : Form
     {
         public string formaat;
+        public string link;
 
         public Form1()
         {
@@ -21,10 +22,6 @@ namespace Free_Tärn_YouTube_converter
             FormatList.Items.Add("Mp4");
             FormatList.Items.Add("m4a");
             FormatList.Items.Add("webm");
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = @"C:\Users\opilane\Documents\GitHub\YT-converter\Free Tärn YouTube converter\youtube-dl.exe";
-            startInfo.Arguments = "-f 140 https://www.youtube.com/watch?v=H5dn5OA6o5k";
-            Process.Start(startInfo);
         }
 
         private void FormatList_SelectedIndexChanged(object sender, EventArgs e)
@@ -34,12 +31,15 @@ namespace Free_Tärn_YouTube_converter
 
         private void LinkBox_TextChanged(object sender, EventArgs e)
         {
-
+            link = LinkBox.Text;
         }
 
         private void Tõmba_Click(object sender, EventArgs e)
         {
-
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = @"C:\Users\opilane\Documents\GitHub\YT-converter\Free Tärn YouTube converter\youtube-dl.exe";
+            startInfo.Arguments = "-f " + formaat + link;
+            Process.Start(startInfo);
         }
     }
 }
