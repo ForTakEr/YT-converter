@@ -76,7 +76,7 @@ namespace Free_Tärn_YouTube_converter
 
         private void Tõmba_Click(object sender, EventArgs e)
         {
-            //If statementiga Tõmba ei tööta, kui ei ole kõik väjad täitnud
+            //If statementiga Tõmba ei tööta, kui ei ole kõik väljad täidetud
             if (!string.IsNullOrWhiteSpace(link) && !string.IsNullOrWhiteSpace(formaat))
             {
                 try
