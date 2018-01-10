@@ -20,6 +20,7 @@ namespace Free_Tärn_YouTube_converter
         public int index;
         public string kõik;
         public string failiNimi;
+        public string path;
 
         public Form1()
         {
@@ -126,7 +127,7 @@ namespace Free_Tärn_YouTube_converter
                         StartInfo = new ProcessStartInfo
                         {
                             FileName = "youtube-dl.exe",
-                            Arguments = "-f " + index + " " + link,
+                            Arguments = "-o " + path + @"\" + " -f " + index + " " + link,
                             UseShellExecute = false,
                             RedirectStandardOutput = true,
                             CreateNoWindow = true
@@ -208,10 +209,8 @@ namespace Free_Tärn_YouTube_converter
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             if (fbd.ShowDialog() == DialogResult.OK)
             {
-                string path = fbd.SelectedPath;
+                path = fbd.SelectedPath;
             }
-
-
         }
     }
 }
