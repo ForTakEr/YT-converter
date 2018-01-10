@@ -25,7 +25,7 @@ namespace Free_Tärn_YouTube_converter
         public Form1()
         {
             InitializeComponent();
-            FormatList.Items.Add("Mp4");
+            FormatList.Items.Add("mp4");
             FormatList.Items.Add("m4a");
             FormatList.Items.Add("webm");
         }
@@ -68,71 +68,42 @@ namespace Free_Tärn_YouTube_converter
             formaat = Convert.ToString(FormatList.SelectedItem);
             if (!string.IsNullOrWhiteSpace(link) && !string.IsNullOrWhiteSpace(formaat))
             {
-                int i = 1;
-
+                if (string.IsNullOrWhiteSpace(path))
+                {
+                    path = Directory.GetCurrentDirectory();
+                }
                 while (true)
                 {
-                    if (formaat == "Mp4")
+                    var convert = new Process();
+                    convert.StartInfo.FileName = "youtube-dl.exe";
+                    if (!string.IsNullOrWhiteSpace(failiNimi))
                     {
-                        switch (i)
-                        {
-                            case 1: //1080p
-                                index = 137;
-                                i++;
-                                break;
-                            case 2: //720p
-                                index = 22;
-                                i++;
-                                break;
-                            case 3: //480p
-                                index = 135;
-                                i++;
-                                break;
-                            case 4: //360p
-                                index = 18;
-                                i++;
-                                break;
-                        }
+                        convert.StartInfo.Arguments = "-o " + "\u0022" + path + @"\" + failiNimi + "." + formaat + "\u0022" + " " + link; 
                     }
-                    //Audio
-                    if (formaat == "m4a")
+                    else
                     {
-                        index = 140;
-                    }
-                    //Audio
-                    if (formaat == "webm")
-                    {
-                        switch (i)
+                        var fileName = new Process
                         {
-                            case 1:
-                                index = 251;
-                                i++;
-                                break;
-                            case 2:
-                                index = 171;
-                                i++;
-                                break;
-                            case 3:
-                                index = 250;
-                                i++;
-                                break;
-                            case 4:
-                                index = 249;
-                                i++;
-                                break;
-                        }
+                            StartInfo = new ProcessStartInfo
+                            {
+                                FileName = "youtube-dl.exe",
+                                Arguments = "--get-filename " + link,
+                                UseShellExecute = false,
+                                RedirectStandardOutput = true,
+                                CreateNoWindow = true
+                            }
+                        };
+                        fileName.Start();
+                        failiNimi = fileName.StandardOutput.ReadToEnd();
+                        fileName.WaitForExit();
+                        convert.StartInfo.Arguments = "-o " + "\u0022" + path + @"\" + failiNimi + "\u0022" + " " + link;
                     }
-                    var convert = new Process
+                    if (!KonsooliNäha.Checked)
                     {
-                        StartInfo = new ProcessStartInfo
-                        {
-                            FileName = "youtube-dl.exe",
-                            Arguments = "-o " + path + @"\" + " -f " + index + " " + link,
-                            UseShellExecute = false,
-                            RedirectStandardOutput = true,
-                            CreateNoWindow = true
-                        }
-                    };
+                        convert.StartInfo.UseShellExecute = false;
+                        convert.StartInfo.CreateNoWindow = true; 
+                    }
+
                     try
                     {
                         convert.Start();
@@ -143,23 +114,13 @@ namespace Free_Tärn_YouTube_converter
                         MessageBox.Show("Youtube-dl ei leitud");
                         throw;
                     }
-                    var fileName = new Process
-                    {
-                        StartInfo = new ProcessStartInfo
-                        {
-                            FileName = "youtube-dl.exe",
-                            Arguments = "--get-filename " + link,
-                            UseShellExecute = false,
-                            RedirectStandardOutput = true,
-                            CreateNoWindow = true
-                        }
-                    };
-                    fileName.Start();
-                    failiNimi = fileName.StandardOutput.ReadToEnd();
-                    fileName.WaitForExit();
-                    if (File.Exists(failiNimi))
+
+                    if (File.Exists(path + @"\" + failiNimi + "." + formaat))
                     {
                         MessageBox.Show("Teie video on convertitud");
+                        LinkBox.Text = "";
+                        FormatList.ResetText();
+                        NimeBox.Text = "";
                         break;
                     } 
                 }
@@ -197,7 +158,8 @@ namespace Free_Tärn_YouTube_converter
         private void ClearButton_Click(object sender, EventArgs e)
         {
             LinkBox.Text = "";
-            FormatList.Text = "";
+            FormatList.ResetText();
+            NimeBox.Text = "";
         }
 
         private void Exit_Click(object sender, EventArgs e)
@@ -211,6 +173,16 @@ namespace Free_Tärn_YouTube_converter
             {
                 path = fbd.SelectedPath;
             }
+        }
+
+        private void NimeBox_TextChanged(object sender, EventArgs e)
+        {
+            failiNimi = NimeBox.Text;
+        }
+
+        private void KonsooliNäha_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
