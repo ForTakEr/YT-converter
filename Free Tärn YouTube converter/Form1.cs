@@ -18,6 +18,7 @@ namespace Free_Tärn_YouTube_converter
         public string link;
         public int index;
         public string kõik;
+        public string failiNimi;
 
         public Form1()
         {
@@ -88,7 +89,7 @@ namespace Free_Tärn_YouTube_converter
                             i++;
                             break;
                     }
-                    if (!string.IsNullOrWhiteSpace(link) && !string.IsNullOrWhiteSpace(formaat))
+                    if (!string.IsNullOrWhiteSpace(link) && !string.IsNullOrWhiteSpace(formaat) && !string.IsNullOrWhiteSpace(failiNimi))
                     {
                         var convert = new Process
                         {
@@ -105,16 +106,17 @@ namespace Free_Tärn_YouTube_converter
                         {
                             convert.Start();
                             convert.WaitForExit();
-
-                            if (File.Exists("*.mp4"))
-                            {
-                                break;
-                            }
                         }
                         catch (Exception)
                         {
                             MessageBox.Show("Youtube-dl ei leitud");
                             throw;
+                        }
+
+                        if (File.Exists(failiNimi + ".mp4"))
+                        {
+                            label1.Text = failiNimi;
+                            break;
                         }
                     }
                     else
@@ -170,6 +172,11 @@ namespace Free_Tärn_YouTube_converter
         private void Exit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            failiNimi = textBox1.Text;
         }
     }
 }
