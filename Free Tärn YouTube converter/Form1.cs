@@ -68,13 +68,21 @@ namespace Free_Tärn_YouTube_converter
 
         private void Tõmba_Click(object sender, EventArgs e)
         {
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.UseShellExecute = false;
-            startInfo.CreateNoWindow = true;
-            startInfo.FileName = @"C:\Users\opilane\Documents\GitHub\YT-converter\Free Tärn YouTube converter\youtube-dl.exe";
-            startInfo.Arguments = "-f " + index + " " + link;
-            Process.Start(startInfo);
-            MessageBox.Show("Video on convertitud");
+            //If statementiga Tõmba ei tööta, kui ei ole kõik väjad täitnud
+            if (!string.IsNullOrWhiteSpace(link) || !string.IsNullOrWhiteSpace(formaat))
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.UseShellExecute = false;
+                startInfo.CreateNoWindow = true;
+                startInfo.FileName = @"C:\Users\opilane\Documents\GitHub\YT-converter\Free Tärn YouTube converter\youtube-dl.exe";
+                startInfo.Arguments = "-f " + index + " " + link;
+                Process.Start(startInfo);
+                MessageBox.Show("Video on convertitud"); 
+            }
+            else
+            {
+                MessageBox.Show("Palun täida kõik väljad");
+            }
         }
 
         private void ClearButton_Click(object sender, EventArgs e)
