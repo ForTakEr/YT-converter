@@ -79,12 +79,20 @@ namespace Free_Tärn_YouTube_converter
             //If statementiga Tõmba ei tööta, kui ei ole kõik väjad täitnud
             if (!string.IsNullOrWhiteSpace(link) && !string.IsNullOrWhiteSpace(formaat))
             {
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.UseShellExecute = false;
-                startInfo.CreateNoWindow = true;
-                startInfo.FileName = "youtube-dl.exe";
-                startInfo.Arguments = "-f " + index + " " + link;
-                Process.Start(startInfo);
+                try
+                {
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    startInfo.UseShellExecute = false;
+                    startInfo.CreateNoWindow = true;
+                    startInfo.FileName = "youtube-dl.exe";
+                    startInfo.Arguments = "-f " + index + " " + link;
+                    Process.Start(startInfo);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Youtube-dl ei leitud");
+                    throw;
+                }
                 MessageBox.Show("Video on convertitud"); 
             }
             else
