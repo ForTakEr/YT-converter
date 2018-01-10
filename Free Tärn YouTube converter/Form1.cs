@@ -49,27 +49,35 @@ namespace Free_Tärn_YouTube_converter
         private void LinkBox_TextChanged(object sender, EventArgs e)
         {
             link = LinkBox.Text;
-            var proc = new Process
-            {
-                StartInfo = new ProcessStartInfo
-                {
-                    FileName = "youtube-dl.exe",
-                    Arguments = "-F " + link,
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    CreateNoWindow = true
-                }
-            };
-            proc.Start();
-            kõik = proc.StandardOutput.ReadToEnd();
-            proc.WaitForExit();
-            FormatList.Text = kõik;
+            //var proc = new Process
+            //{
+            //    StartInfo = new ProcessStartInfo
+            //    {
+            //        FileName = "youtube-dl.exe",
+            //        Arguments = "-F " + link,
+            //        UseShellExecute = false,
+            //        RedirectStandardOutput = true,
+            //        CreateNoWindow = true
+            //    }
+            //};
+            //try
+            //{
+            //    proc.Start();
+            //    kõik = proc.StandardOutput.ReadToEnd();
+            //    proc.WaitForExit();
+            //    FormatList.Text = kõik;
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Youtube-dl ei leitud");
+            //    throw;
+            //}
         }
 
         private void Tõmba_Click(object sender, EventArgs e)
         {
             //If statementiga Tõmba ei tööta, kui ei ole kõik väjad täitnud
-            if (!string.IsNullOrWhiteSpace(link) || !string.IsNullOrWhiteSpace(formaat))
+            if (!string.IsNullOrWhiteSpace(link) && !string.IsNullOrWhiteSpace(formaat))
             {
                 ProcessStartInfo startInfo = new ProcessStartInfo();
                 startInfo.UseShellExecute = false;
