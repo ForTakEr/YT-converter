@@ -95,7 +95,7 @@ namespace Free_Tärn_YouTube_converter
                             StartInfo = new ProcessStartInfo
                             {
                                 FileName = "youtube-dl.exe",
-                                Arguments = "-F " + link,
+                                Arguments = "-f " + index + " " + link,
                                 UseShellExecute = false,
                                 RedirectStandardOutput = true,
                                 CreateNoWindow = true
@@ -104,7 +104,6 @@ namespace Free_Tärn_YouTube_converter
                         try
                         {
                             convert.Start();
-                            kõik = convert.StandardOutput.ReadToEnd();
                             convert.WaitForExit();
 
                             if (File.Exists("*.mp4"))
