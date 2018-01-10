@@ -53,7 +53,7 @@ namespace Free_Tärn_YouTube_converter
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = @"C:\Users\opilane\Documents\GitHub\YT-converter\Free Tärn YouTube converter\youtube-dl.exe",
+                    FileName = "youtube-dl.exe",
                     Arguments = "-F " + link,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
@@ -74,7 +74,7 @@ namespace Free_Tärn_YouTube_converter
                 ProcessStartInfo startInfo = new ProcessStartInfo();
                 startInfo.UseShellExecute = false;
                 startInfo.CreateNoWindow = true;
-                startInfo.FileName = @"C:\Users\opilane\Documents\GitHub\YT-converter\Free Tärn YouTube converter\youtube-dl.exe";
+                startInfo.FileName = "youtube-dl.exe";
                 startInfo.Arguments = "-f " + index + " " + link;
                 Process.Start(startInfo);
                 MessageBox.Show("Video on convertitud"); 
