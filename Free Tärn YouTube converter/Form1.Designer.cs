@@ -34,7 +34,6 @@
             this.LinkBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.ClearButton = new System.Windows.Forms.Button();
-            this.Exit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // FormatList
@@ -92,22 +91,11 @@
             this.ClearButton.UseVisualStyleBackColor = true;
             this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
-            // Exit
-            // 
-            this.Exit.Location = new System.Drawing.Point(12, 130);
-            this.Exit.Name = "Exit";
-            this.Exit.Size = new System.Drawing.Size(75, 23);
-            this.Exit.TabIndex = 6;
-            this.Exit.Text = "Exit";
-            this.Exit.UseVisualStyleBackColor = true;
-            this.Exit.Click += new System.EventHandler(this.Exit_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(426, 161);
-            this.Controls.Add(this.Exit);
             this.Controls.Add(this.ClearButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.LinkBox);
@@ -129,7 +117,6 @@
         private System.Windows.Forms.TextBox LinkBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button ClearButton;
-        private System.Windows.Forms.Button Exit;
     }
 }
 
