@@ -106,5 +106,10 @@ namespace Free_Tärn_YouTube_converter
             LinkBox.Text = "";
             FormatList.Text = "";
         }
+
+        private void Exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
