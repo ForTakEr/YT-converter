@@ -234,7 +234,9 @@ namespace Free_Tärn_YouTube_converter
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("okei");
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                MessageBox.Show(fbd.SelectedPath + "\ngive me your money");
         }
     }
 }
