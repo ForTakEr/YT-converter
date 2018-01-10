@@ -29,15 +29,17 @@ namespace Free_Tärn_YouTube_converter
         private void FormatList_SelectedIndexChanged(object sender, EventArgs e)
         {
             formaat = Convert.ToString(FormatList.SelectedItem);
-
+            //Video
             if (formaat == "Mp4")
             {
                 index = 137;
             }
+            //Audio
             if (formaat == "m4a")
             {
                 index = 140;
             }
+            //Audio
             if (formaat == "webm")
             {
                 index = 248;
