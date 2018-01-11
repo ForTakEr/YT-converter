@@ -170,7 +170,10 @@ namespace Free_Tärn_YouTube_converter
                     }
                     if (!string.IsNullOrWhiteSpace(ffmpeg) && !string.IsNullOrWhiteSpace(YTdl))
                     {
-                        convert.StartInfo.Arguments = ""; //siit edasi teha
+                        if (formaat == "wav" || formaat == "mp3" || formaat == "m4a")
+                        {
+                            convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " --output " + "\u0022" + path + @"\" + failiNimi.Replace("\n", "") + "." + formaat + "\u0022" + " " + link;
+                        }
                     }
 
                     try
@@ -193,7 +196,7 @@ namespace Free_Tärn_YouTube_converter
                             FormatList.ResetText();
                             NimeBox.Text = "";
                             break;
-                        }  
+                        }
                     }
                     else
                     {

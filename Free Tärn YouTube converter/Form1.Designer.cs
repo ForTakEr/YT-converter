@@ -102,7 +102,7 @@
             // 
             // Exit
             // 
-            this.Exit.Location = new System.Drawing.Point(12, 130);
+            this.Exit.Location = new System.Drawing.Point(13, 159);
             this.Exit.Name = "Exit";
             this.Exit.Size = new System.Drawing.Size(75, 23);
             this.Exit.TabIndex = 6;
@@ -151,7 +151,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 171);
+            this.label4.Location = new System.Drawing.Point(161, 136);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(209, 13);
             this.label4.TabIndex = 10;
@@ -160,26 +160,27 @@
             // 
             // ResourceDirectory
             // 
-            this.ResourceDirectory.Location = new System.Drawing.Point(12, 192);
+            this.ResourceDirectory.Location = new System.Drawing.Point(164, 152);
             this.ResourceDirectory.Name = "ResourceDirectory";
             this.ResourceDirectory.Size = new System.Drawing.Size(75, 23);
             this.ResourceDirectory.TabIndex = 11;
             this.ResourceDirectory.Text = "Choose";
             this.ResourceDirectory.UseVisualStyleBackColor = true;
             this.ResourceDirectory.Click += new System.EventHandler(this.ResourceDirectory_Click);
+            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(164, 148);
+            this.button2.Location = new System.Drawing.Point(13, 130);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(69, 23);
+            this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 10;
-            this.button2.Text = "Asukoht";
+            this.button2.Text = "Open folder";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(250, 148);
+            this.progressBar1.Location = new System.Drawing.Point(250, 152);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(132, 23);
             this.progressBar1.TabIndex = 11;
@@ -189,10 +190,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(394, 227);
+            this.ClientSize = new System.Drawing.Size(394, 195);
             this.Controls.Add(this.ResourceDirectory);
             this.Controls.Add(this.label4);
-            this.ClientSize = new System.Drawing.Size(394, 183);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.KonsooliNäha);
