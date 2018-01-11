@@ -224,29 +224,6 @@ namespace Free_Tärn_YouTube_converter
             {
                 MessageBox.Show("Palun täida kõik väljad");
             }
-            ////If statementiga Tõmba ei tööta, kui ei ole kõik väljad täidetud
-            //if (!string.IsNullOrWhiteSpace(link) && !string.IsNullOrWhiteSpace(formaat))
-            //{
-            //    try
-            //    {
-            //        ProcessStartInfo startInfo = new ProcessStartInfo();
-            //        startInfo.UseShellExecute = false;
-            //        startInfo.CreateNoWindow = true;
-            //        startInfo.FileName = "youtube-dl.exe";
-            //        startInfo.Arguments = "-f " + index + " " + link;
-            //        Process.Start(startInfo);
-            //    }
-            //    catch (Exception)
-            //    {
-            //        MessageBox.Show("Youtube-dl ei leitud");
-            //        throw;
-            //    }
-            //    MessageBox.Show("Video on convertitud"); 
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Palun täida kõik väljad");
-            //}
         }
 
         private void ClearButton_Click(object sender, EventArgs e)
