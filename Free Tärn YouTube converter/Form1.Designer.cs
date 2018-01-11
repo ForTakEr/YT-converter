@@ -42,7 +42,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.ResourceDirectory = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // FormatList
@@ -178,6 +177,7 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+<<<<<<< HEAD
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(250, 152);
@@ -186,6 +186,8 @@
             this.progressBar1.TabIndex = 11;
             this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click);
             // 
+=======
+>>>>>>> d34482b6faf3c3686640dee58c746ce9bd9bd5f6
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -193,7 +195,11 @@
             this.ClientSize = new System.Drawing.Size(394, 195);
             this.Controls.Add(this.ResourceDirectory);
             this.Controls.Add(this.label4);
+<<<<<<< HEAD
             this.Controls.Add(this.progressBar1);
+=======
+            this.ClientSize = new System.Drawing.Size(394, 183);
+>>>>>>> d34482b6faf3c3686640dee58c746ce9bd9bd5f6
             this.Controls.Add(this.button2);
             this.Controls.Add(this.KonsooliNäha);
             this.Controls.Add(this.NimeBox);
@@ -229,7 +235,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button ResourceDirectory;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 
