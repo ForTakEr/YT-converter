@@ -96,7 +96,8 @@ namespace Free_Tärn_YouTube_converter
                         fileName.Start();
                         failiNimi = fileName.StandardOutput.ReadToEnd();
                         fileName.WaitForExit();
-                        convert.StartInfo.Arguments = "-o " + "\u0022" + path + @"\" + failiNimi + "\u0022" + " " + link;
+                        failiNimi.Replace("\n", "");
+                        convert.StartInfo.Arguments = "-o " + "\u0022" + path + @"\" + failiNimi.Replace("\n", "") + "\u0022" + " " + link;
                     }
                     if (!KonsooliNäha.Checked)
                     {
@@ -115,14 +116,28 @@ namespace Free_Tärn_YouTube_converter
                         throw;
                     }
 
-                    if (File.Exists(path + @"\" + failiNimi + "." + formaat))
+                    if (!string.IsNullOrWhiteSpace(NimeBox.Text))
                     {
-                        MessageBox.Show("Teie video on convertitud");
-                        LinkBox.Text = "";
-                        FormatList.ResetText();
-                        NimeBox.Text = "";
-                        break;
-                    } 
+                        if (File.Exists(path + @"\" + failiNimi + "." + formaat))
+                        {
+                            MessageBox.Show("Teie video on convertitud");
+                            LinkBox.Text = "";
+                            FormatList.ResetText();
+                            NimeBox.Text = "";
+                            break;
+                        }  
+                    }
+                    else
+                    {
+                        if (File.Exists(path + @"\" + failiNimi))
+                        {
+                            MessageBox.Show("Teie video on convertitud");
+                            LinkBox.Text = "";
+                            FormatList.ResetText();
+                            NimeBox.Text = "";
+                            break;
+                        }
+                    }
                 }
 
             }
