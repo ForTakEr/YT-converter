@@ -181,7 +181,7 @@ namespace Free_Tärn_YouTube_converter
                             convert.StartInfo.Arguments = "-f " + index + " -a " + TXTFail;
                         }
                     }
-                    if (File.Exists(path + @"\" + failiNimi))
+                    if (!File.Exists(path + @"\" + failiNimi))
                     {
                         if (!KonsooliNäha.Checked)
                         {
