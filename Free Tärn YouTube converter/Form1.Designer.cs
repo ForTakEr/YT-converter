@@ -49,7 +49,7 @@
             this.FormatList.FormattingEnabled = true;
             this.FormatList.Location = new System.Drawing.Point(13, 33);
             this.FormatList.Name = "FormatList";
-            this.FormatList.Size = new System.Drawing.Size(121, 21);
+            this.FormatList.Size = new System.Drawing.Size(75, 21);
             this.FormatList.TabIndex = 1;
             this.FormatList.SelectedIndexChanged += new System.EventHandler(this.FormatList_SelectedIndexChanged);
             // 
@@ -58,9 +58,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 13);
+            this.label1.Size = new System.Drawing.Size(62, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Vali format";
+            this.label1.Text = "Vali formaat";
             // 
             // Tõmba
             // 
@@ -74,7 +74,7 @@
             // 
             // LinkBox
             // 
-            this.LinkBox.Location = new System.Drawing.Point(164, 34);
+            this.LinkBox.Location = new System.Drawing.Point(119, 34);
             this.LinkBox.Name = "LinkBox";
             this.LinkBox.Size = new System.Drawing.Size(186, 20);
             this.LinkBox.TabIndex = 0;
@@ -83,7 +83,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(161, 14);
+            this.label2.Location = new System.Drawing.Point(116, 14);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(101, 13);
             this.label2.TabIndex = 4;
@@ -111,7 +111,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(356, 33);
+            this.button1.Location = new System.Drawing.Point(311, 32);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(26, 21);
             this.button1.TabIndex = 5;
@@ -122,7 +122,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(161, 72);
+            this.label3.Location = new System.Drawing.Point(116, 57);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(104, 13);
             this.label3.TabIndex = 8;
@@ -130,7 +130,7 @@
             // 
             // NimeBox
             // 
-            this.NimeBox.Location = new System.Drawing.Point(164, 89);
+            this.NimeBox.Location = new System.Drawing.Point(119, 72);
             this.NimeBox.Name = "NimeBox";
             this.NimeBox.Size = new System.Drawing.Size(186, 20);
             this.NimeBox.TabIndex = 4;
@@ -139,7 +139,7 @@
             // KonsooliNäha
             // 
             this.KonsooliNäha.AutoSize = true;
-            this.KonsooliNäha.Location = new System.Drawing.Point(164, 116);
+            this.KonsooliNäha.Location = new System.Drawing.Point(119, 123);
             this.KonsooliNäha.Name = "KonsooliNäha";
             this.KonsooliNäha.Size = new System.Drawing.Size(126, 17);
             this.KonsooliNäha.TabIndex = 9;
@@ -150,7 +150,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(161, 136);
+            this.label4.Location = new System.Drawing.Point(116, 143);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(209, 13);
             this.label4.TabIndex = 10;
@@ -159,7 +159,7 @@
             // 
             // ResourceDirectory
             // 
-            this.ResourceDirectory.Location = new System.Drawing.Point(164, 152);
+            this.ResourceDirectory.Location = new System.Drawing.Point(119, 159);
             this.ResourceDirectory.Name = "ResourceDirectory";
             this.ResourceDirectory.Size = new System.Drawing.Size(75, 23);
             this.ResourceDirectory.TabIndex = 3;
@@ -179,9 +179,11 @@
             // 
             // Form1
             // 
+            this.AcceptButton = this.Tõmba;
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(394, 188);
+            this.ClientSize = new System.Drawing.Size(363, 188);
             this.Controls.Add(this.ResourceDirectory);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.button2);
@@ -196,13 +198,13 @@
             this.Controls.Add(this.Tõmba);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.FormatList);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Form1";
             this.Text = "YouTube video converter";
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.AllowDrop = true;
-            this.DragEnter += new System.Windows.Forms.DragEventHandler(Form1_DragEnter);
-            this.DragDrop += new System.Windows.Forms.DragEventHandler(Form1_DragDrop);
 
         }
 
