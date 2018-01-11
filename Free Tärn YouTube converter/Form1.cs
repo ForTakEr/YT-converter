@@ -225,7 +225,7 @@ namespace Free_Tärn_YouTube_converter
                             {
                                 if (File.Exists(path + @"\" + failiNimi + "." + formaat))
                                 {
-                                    MessageBox.Show("Teie video on convertitud");
+                                    MessageBox.Show("Teie video on alla laetud");
                                     LinkBox.Text = "";
                                     FormatList.ResetText();
                                     NimeBox.Text = "";
@@ -237,7 +237,7 @@ namespace Free_Tärn_YouTube_converter
                             {
                                 if (File.Exists(path + @"\" + failiNimi))
                                 {
-                                    MessageBox.Show("Teie video on convertitud");
+                                    MessageBox.Show("Teie video on alla laetud");
                                     LinkBox.Text = "";
                                     FormatList.ResetText();
                                     NimeBox.Text = "";
@@ -248,7 +248,7 @@ namespace Free_Tärn_YouTube_converter
                         }
                         else
                         {
-                            MessageBox.Show("Teie videod on convertitud");
+                            MessageBox.Show("Teie videod on alla laetud");
                             LinkBox.Text = "";
                             FormatList.ResetText();
                             NimeBox.Text = "";
