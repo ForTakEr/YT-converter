@@ -40,7 +40,6 @@
             this.NimeBox = new System.Windows.Forms.TextBox();
             this.KonsooliNäha = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // FormatList
@@ -156,20 +155,11 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(250, 148);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(132, 23);
-            this.progressBar1.TabIndex = 11;
-            this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(394, 183);
-            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.KonsooliNäha);
             this.Controls.Add(this.NimeBox);
@@ -203,7 +193,6 @@
         private System.Windows.Forms.TextBox NimeBox;
         private System.Windows.Forms.CheckBox KonsooliNäha;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 

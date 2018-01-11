@@ -64,7 +64,7 @@ namespace Free_Tärn_YouTube_converter
         }
 
         private void Tõmba_Click(object sender, EventArgs e)
-        {
+        {           
             int i = 1;
             formaat = Convert.ToString(FormatList.SelectedItem);
             if (formaat == "mp4")
@@ -253,17 +253,12 @@ namespace Free_Tärn_YouTube_converter
         {
             if (!string.IsNullOrWhiteSpace(path))
             {
-                System.Diagnostics.Process.Start(path);
+                Process.Start(path);
             }
             else
             {
                 MessageBox.Show("Palun valige faili allalaadimise asukoht.");
             }
-        }
-
-        private void progressBar1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("cant touch this");
         }
     }
 }
