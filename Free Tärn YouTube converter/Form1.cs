@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace Free_Tärn_YouTube_converter
 {
@@ -24,6 +25,8 @@ namespace Free_Tärn_YouTube_converter
         public string YTdl;
         public string ffmpeg;
         public string TXTFail;
+        public string Protsenttekst;
+        public int protsent;
 
         public Form1()
         {
@@ -76,6 +79,7 @@ namespace Free_Tärn_YouTube_converter
 
         private void Tõmba_Click(object sender, EventArgs e)
         {
+            progressBar1.Visible = true;
             int i = 1;
             formaat = Convert.ToString(FormatList.SelectedItem);
             if (formaat == "mp4")
@@ -171,17 +175,26 @@ namespace Free_Tärn_YouTube_converter
                             convert.StartInfo.Arguments = "-f " + index + " -a " + TXTFail;
                         }
                     }
-
-                    try
+                    convert.StartInfo.RedirectStandardOutput = true;
+                    convert.Start();
+                    for (int a = 0; a < 6; a++)
                     {
-                        convert.Start();
-                        convert.WaitForExit();
+                        kõik = convert.StandardOutput.ReadLine(); 
                     }
-                    catch (Exception)
+                    while (protsent != 100)
                     {
-                        MessageBox.Show("Youtube-dl ei leitud");
-                        throw;
+                        kõik = convert.StandardOutput.ReadLine();
+                        if (kõik != null)
+                        {
+                            Protsenttekst = kõik.Substring(11, 6);
+                            //Protsenttekst = Regex.Replace(Protsenttekst, "[^0-9.]", "");
+                            Protsenttekst = Regex.Match(Protsenttekst, @"\d+").Value;
+                            protsent = Int32.Parse(Protsenttekst);
+                            progressBar1.Value = protsent; 
+                        }
                     }
+                    convert.WaitForExit();
+                    FormatList.Text = Protsenttekst;
 
                     if (string.IsNullOrWhiteSpace(TXTFail))
                     {
@@ -193,6 +206,7 @@ namespace Free_Tärn_YouTube_converter
                                 LinkBox.Text = "";
                                 FormatList.ResetText();
                                 NimeBox.Text = "";
+                                progressBar1.Value = 0;
                                 break;
                             }
                         }
@@ -204,6 +218,7 @@ namespace Free_Tärn_YouTube_converter
                                 LinkBox.Text = "";
                                 FormatList.ResetText();
                                 NimeBox.Text = "";
+                                progressBar1.Value = 0;
                                 break;
                             }
                         } 
@@ -214,6 +229,7 @@ namespace Free_Tärn_YouTube_converter
                         LinkBox.Text = "";
                         FormatList.ResetText();
                         NimeBox.Text = "";
+                        progressBar1.Value = 0;
                         break;
                     }
                 }
@@ -310,6 +326,11 @@ namespace Free_Tärn_YouTube_converter
             {
                 TXTFail = filePath;
             }
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
