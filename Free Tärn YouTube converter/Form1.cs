@@ -27,6 +27,7 @@ namespace Free_Tärn_YouTube_converter
         public string TXTFail;
         public string Protsenttekst;
         public int protsent;
+        public int playlistVideoNumber;
 
         public Form1()
         {
@@ -134,29 +135,32 @@ namespace Free_Tärn_YouTube_converter
                             }
                             else
                             {
-                                var fileName = new Process
+                                if (!link.Contains("playlist"))
                                 {
-                                    StartInfo = new ProcessStartInfo
+                                    var fileName = new Process
                                     {
-                                        FileName = "youtube-dl.exe",
-                                        Arguments = "--get-filename " + link,
-                                        UseShellExecute = false,
-                                        RedirectStandardOutput = true,
-                                        CreateNoWindow = true
+                                        StartInfo = new ProcessStartInfo
+                                        {
+                                            FileName = "youtube-dl.exe",
+                                            Arguments = "--get-filename " + link,
+                                            UseShellExecute = false,
+                                            RedirectStandardOutput = true,
+                                            CreateNoWindow = true
+                                        }
+                                    };
+                                    fileName.Start();
+                                    failiNimi = fileName.StandardOutput.ReadToEnd();
+                                    fileName.WaitForExit();
+                                    failiNimi = failiNimi.Replace("\n", "");
+                                    int indexNumber = failiNimi.IndexOf(".");
+                                    if (indexNumber > 0)
+                                    {
+                                        failiNimi = failiNimi.Substring(0, indexNumber);
                                     }
-                                };
-                                fileName.Start();
-                                failiNimi = fileName.StandardOutput.ReadToEnd();
-                                fileName.WaitForExit();
-                                failiNimi = failiNimi.Replace("\n", "");
-                                int indexNumber = failiNimi.IndexOf(".");
-                                if (indexNumber > 0)
-                                {
-                                    failiNimi = failiNimi.Substring(0, indexNumber);
+                                    failiNimi = failiNimi + "." + formaat;
+                                    failiNimi = Regex.Replace(failiNimi, @"\s+", " ");
+                                    convert.StartInfo.Arguments = "-f " + index + " -o " + "\u0022" + path + @"\" + failiNimi + "\u0022" + " " + link; 
                                 }
-                                failiNimi = failiNimi + "." + formaat;
-                                failiNimi = Regex.Replace(failiNimi, @"\s+", " ");
-                                convert.StartInfo.Arguments = "-f " + index + " -o " + "\u0022" + path + @"\" + failiNimi + "\u0022" + " " + link;
                             }
                             if (!KonsooliNäha.Checked)
                             {
@@ -167,31 +171,38 @@ namespace Free_Tärn_YouTube_converter
                             {
                                 convert.StartInfo.FileName = YTdl;
                             }
-                            if (!string.IsNullOrWhiteSpace(ffmpeg) && !string.IsNullOrWhiteSpace(YTdl))
+                            if (!link.Contains("playlist"))
                             {
-                                if (formaat == "wav" || formaat == "mp3" || formaat == "m4a")
+                                if (!string.IsNullOrWhiteSpace(ffmpeg) && !string.IsNullOrWhiteSpace(YTdl))
                                 {
-                                    if (!string.IsNullOrWhiteSpace(NimeBox.Text))
+                                    if (formaat == "wav" || formaat == "mp3" || formaat == "m4a")
                                     {
-                                        convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " --output " + "\u0022" + path + @"\" + failiNimi.Replace("\n", "") + "." + formaat + "\u0022" + " " + link;
+                                        if (!string.IsNullOrWhiteSpace(NimeBox.Text))
+                                        {
+                                            convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " --output " + "\u0022" + path + @"\" + failiNimi.Replace("\n", "") + "." + formaat + "\u0022" + " " + link;
+                                        }
+                                        else
+                                        {
+                                            convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " -o " + "\u0022" + path + @"\" + failiNimi + "\u0022" + " " + link;
+                                            failiNimi = failiNimi.Replace(".mp4", "." + formaat);
+                                        }
+                                    }
+                                }
+                                if (!string.IsNullOrWhiteSpace(TXTFail))
+                                {
+                                    if (formaat == "wav" || formaat == "mp3" || formaat == "m4a")
+                                    {
+                                        convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " -a " + TXTFail;
                                     }
                                     else
                                     {
-                                        convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " -o " + "\u0022" + path + @"\" + failiNimi + "\u0022" + " " + link;
-                                        failiNimi = failiNimi.Replace(".mp4", "." + formaat);
+                                        convert.StartInfo.Arguments = "-f " + index + " -a " + TXTFail;
                                     }
-                                }
+                                } 
                             }
-                            if (!string.IsNullOrWhiteSpace(TXTFail))
+                            else
                             {
-                                if (formaat == "wav" || formaat == "mp3" || formaat == "m4a")
-                                {
-                                    convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " -a " + TXTFail;
-                                }
-                                else
-                                {
-                                    convert.StartInfo.Arguments = "-f " + index + " -a " + TXTFail;
-                                }
+                                convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " " + link;
                             }
                             if (!File.Exists(path + @"\" + failiNimi))
                             {
@@ -199,43 +210,73 @@ namespace Free_Tärn_YouTube_converter
                                 {
                                     convert.StartInfo.RedirectStandardOutput = true;
                                     convert.Start();
-                                    for (int a = 0; a < 6; a++)
+                                    if (!link.Contains("playlist"))
                                     {
-                                        kõik = convert.StandardOutput.ReadLine();
-                                    }
-                                    while (protsent != 100)
-                                    {
-                                        kõik = convert.StandardOutput.ReadLine();
-                                        if (kõik != null)
+                                        for (int a = 0; a < 6; a++)
                                         {
-                                            Protsenttekst = kõik.Substring(11, 6);
-                                            //Protsenttekst = Regex.Replace(Protsenttekst, "[^0-9.]", "");
-                                            Protsenttekst = Regex.Match(Protsenttekst, @"\d+").Value;
-                                            if (Protsenttekst == "")
+                                            kõik = convert.StandardOutput.ReadLine();
+                                        } 
+                                    }
+                                    else
+                                    {
+                                        for (int a = 0; a < 15; a++)
+                                        {
+                                            kõik = convert.StandardOutput.ReadLine();
+                                            if (a == 2)
                                             {
+                                                kõik = Regex.Match(kõik, @"\d+").Value;
+                                                playlistVideoNumber = Int32.Parse(kõik);
+                                            }
+                                        }
+                                    }
+                                    if (!link.Contains("playlist"))
+                                    {
+                                        playlistVideoNumber = 1;
+                                    }
+                                    for (int a = 0; a < playlistVideoNumber; a++)
+                                    {
+                                        while (protsent != 100)
+                                        {
+                                            kõik = convert.StandardOutput.ReadLine();
+                                            if (kõik != null || link.Contains("playlist"))
+                                            {
+                                                Protsenttekst = kõik.Substring(11, 6);
+                                                //Protsenttekst = Regex.Replace(Protsenttekst, "[^0-9.]", "");
+                                                Protsenttekst = Regex.Match(Protsenttekst, @"\d+").Value;
+                                                if (Protsenttekst == "")
+                                                {
+                                                    if (link.Contains("playlist"))
+                                                    {
+                                                        Protsenttekst = "1";
+                                                    }
+                                                    else
+                                                    {
+                                                        break;
+                                                    }
+                                                }
+                                                protsent = Int32.Parse(Protsenttekst);
+                                                progressBar1.Value = protsent;
+                                            }
+                                            else
+                                            {
+                                                if (formaat == "mp4")
+                                                {
+                                                    switch (i)
+                                                    {
+                                                        case 1: //720p
+                                                            index = 22;
+                                                            i++;
+                                                            break;
+                                                        case 2: //360p
+                                                            index = 18;
+                                                            i++;
+                                                            break;
+                                                    }
+                                                }
                                                 break;
                                             }
-                                            protsent = Int32.Parse(Protsenttekst);
-                                            progressBar1.Value = protsent;
                                         }
-                                        else
-                                        {
-                                            if (formaat == "mp4")
-                                            {
-                                                switch (i)
-                                                {
-                                                    case 1: //720p
-                                                        index = 22;
-                                                        i++;
-                                                        break;
-                                                    case 2: //360p
-                                                        index = 18;
-                                                        i++;
-                                                        break;
-                                                }
-                                            }
-                                            break;
-                                        }
+                                        protsent = 0;
                                     }
                                     convert.WaitForExit();
                                 }
