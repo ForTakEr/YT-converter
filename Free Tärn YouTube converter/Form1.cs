@@ -30,7 +30,6 @@ namespace Free_Tärn_YouTube_converter
             InitializeComponent();
             FormatList.Items.Add("mp4");
             FormatList.Items.Add("m4a");
-            FormatList.Items.Add("webm");
             FormatList.Items.Add("wav");
             FormatList.Items.Add("mp3");
         }
@@ -83,19 +82,11 @@ namespace Free_Tärn_YouTube_converter
             {
                 switch (i)
                 {
-                    case 1: //1080p
-                        index = 137;
-                        i++;
-                        break;
-                    case 2: //720p
+                    case 1: //720p
                         index = 22;
                         i++;
                         break;
-                    case 3: //480p
-                        index = 135;
-                        i++;
-                        break;
-                    case 4: //360p
+                    case 2: //360p
                         index = 18;
                         i++;
                         break;
@@ -105,28 +96,7 @@ namespace Free_Tärn_YouTube_converter
             {
                 index = 140;
             }
-            if (formaat == "webm")
-            {
-                switch (i)
-                {
-                    case 1:
-                        index = 251;
-                        i++;
-                        break;
-                    case 2:
-                        index = 171;
-                        i++;
-                        break;
-                    case 3:
-                        index = 250;
-                        i++;
-                        break;
-                    case 4:
-                        index = 249;
-                        i++;
-                        break;
-                }
-            }
+            
             if (!string.IsNullOrWhiteSpace(link) || !string.IsNullOrWhiteSpace(TXTFail) && !string.IsNullOrWhiteSpace(formaat))
             {
                 if (string.IsNullOrWhiteSpace(path))
