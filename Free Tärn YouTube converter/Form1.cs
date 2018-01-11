@@ -41,7 +41,7 @@ namespace Free_Tärn_YouTube_converter
         {
             if (Convert.ToString(FormatList.SelectedItem) == "mp3" || Convert.ToString(FormatList.SelectedItem) == "wav")
             {
-                if (string.IsNullOrWhiteSpace(ffmpeg))
+                if (string.IsNullOrWhiteSpace(ffmpeg) || !File.Exists("ffmpeg.exe"))
                 {
                     MessageBox.Show("Selleks on vaja tõmmata ffmpeg ja ffprobe");
                     FormatList.Text = "";
@@ -79,6 +79,12 @@ namespace Free_Tärn_YouTube_converter
 
         private void Tõmba_Click(object sender, EventArgs e)
         {
+            kõik = string.Empty;
+            Protsenttekst = string.Empty;
+            protsent = 0;
+
+
+
             progressBar1.Visible = true;
             int i = 1;
             formaat = Convert.ToString(FormatList.SelectedItem);
@@ -194,7 +200,7 @@ namespace Free_Tärn_YouTube_converter
                         }
                     }
                     convert.WaitForExit();
-                    FormatList.Text = Protsenttekst;
+                    
 
                     if (string.IsNullOrWhiteSpace(TXTFail))
                     {
