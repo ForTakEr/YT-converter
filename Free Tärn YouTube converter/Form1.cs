@@ -181,26 +181,33 @@ namespace Free_Tärn_YouTube_converter
                             convert.StartInfo.Arguments = "-f " + index + " -a " + TXTFail;
                         }
                     }
-                    convert.StartInfo.RedirectStandardOutput = true;
-                    convert.Start();
-                    for (int a = 0; a < 6; a++)
+                    if (!KonsooliNäha.Checked)
                     {
-                        kõik = convert.StandardOutput.ReadLine(); 
-                    }
-                    while (protsent != 100)
-                    {
-                        kõik = convert.StandardOutput.ReadLine();
-                        if (kõik != null)
+                        convert.StartInfo.RedirectStandardOutput = true;
+                        convert.Start();
+                        for (int a = 0; a < 6; a++)
                         {
-                            Protsenttekst = kõik.Substring(11, 6);
-                            //Protsenttekst = Regex.Replace(Protsenttekst, "[^0-9.]", "");
-                            Protsenttekst = Regex.Match(Protsenttekst, @"\d+").Value;
-                            protsent = Int32.Parse(Protsenttekst);
-                            progressBar1.Value = protsent; 
+                            kõik = convert.StandardOutput.ReadLine();
                         }
+                        while (protsent != 100)
+                        {
+                            kõik = convert.StandardOutput.ReadLine();
+                            if (kõik != null)
+                            {
+                                Protsenttekst = kõik.Substring(11, 6);
+                                //Protsenttekst = Regex.Replace(Protsenttekst, "[^0-9.]", "");
+                                Protsenttekst = Regex.Match(Protsenttekst, @"\d+").Value;
+                                protsent = Int32.Parse(Protsenttekst);
+                                progressBar1.Value = protsent;
+                            }
+                        }
+                        convert.WaitForExit(); 
                     }
-                    convert.WaitForExit();
-                    
+                    else
+                    {
+                        convert.Start();
+                        convert.WaitForExit();
+                    }
 
                     if (string.IsNullOrWhiteSpace(TXTFail))
                     {
