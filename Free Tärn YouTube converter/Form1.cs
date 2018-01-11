@@ -155,6 +155,7 @@ namespace Free_Tärn_YouTube_converter
                                     failiNimi = failiNimi.Substring(0, indexNumber);
                                 }
                                 failiNimi = failiNimi + "." + formaat;
+                                failiNimi = Regex.Replace(failiNimi, @"\s+", " ");
                                 convert.StartInfo.Arguments = "-f " + index + " -o " + "\u0022" + path + @"\" + failiNimi + "\u0022" + " " + link;
                             }
                             if (!KonsooliNäha.Checked)
@@ -176,7 +177,7 @@ namespace Free_Tärn_YouTube_converter
                                     }
                                     else
                                     {
-                                        convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " " + link;
+                                        convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " -o " + "\u0022" + path + @"\" + failiNimi + "\u0022" + " " + link;
                                         failiNimi = failiNimi.Replace(".mp4", "." + formaat);
                                     }
                                 }
