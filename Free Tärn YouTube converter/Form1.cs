@@ -76,7 +76,56 @@ namespace Free_Tärn_YouTube_converter
 
         private void Tõmba_Click(object sender, EventArgs e)
         {
+            int i = 1;
             formaat = Convert.ToString(FormatList.SelectedItem);
+            if (formaat == "mp4")
+            {
+                switch (i)
+                {
+                    case 1: //1080p
+                        index = 137;
+                        i++;
+                        break;
+                    case 2: //720p
+                        index = 22;
+                        i++;
+                        break;
+                    case 3: //480p
+                        index = 135;
+                        i++;
+                        break;
+                    case 4: //360p
+                        index = 18;
+                        i++;
+                        break;
+                }                
+            }
+            if (formaat == "m4a")
+            {
+                index = 140;
+            }
+            if (formaat == "webm")
+            {
+                switch (i)
+                {
+                    case 1:
+                        index = 251;
+                        i++;
+                        break;
+                    case 2:
+                        index = 171;
+                        i++;
+                        break;
+                    case 3:
+                        index = 250;
+                        i++;
+                        break;
+                    case 4:
+                        index = 249;
+                        i++;
+                        break;
+                }
+            }
             if (!string.IsNullOrWhiteSpace(link) && !string.IsNullOrWhiteSpace(formaat))
             {
                 if (string.IsNullOrWhiteSpace(path))
@@ -89,7 +138,7 @@ namespace Free_Tärn_YouTube_converter
                     convert.StartInfo.FileName = "youtube-dl.exe";
                     if (!string.IsNullOrWhiteSpace(failiNimi))
                     {
-                        convert.StartInfo.Arguments = "-o " + "\u0022" + path + @"\" + failiNimi + "." + formaat + "\u0022" + " " + link; 
+                        convert.StartInfo.Arguments = "-f " + index + " -o " + "\u0022" + path + @"\" + failiNimi + "." + formaat + "\u0022" + " " + link; 
                     }
                     else
                     {
@@ -108,7 +157,7 @@ namespace Free_Tärn_YouTube_converter
                         failiNimi = fileName.StandardOutput.ReadToEnd();
                         fileName.WaitForExit();
                         failiNimi.Replace("\n", "");
-                        convert.StartInfo.Arguments = "-o " + "\u0022" + path + @"\" + failiNimi.Replace("\n", "") + "\u0022" + " " + link;
+                        convert.StartInfo.Arguments = "-f " + index + " -o " + "\u0022" + path + @"\" + failiNimi.Replace("\n", "") + "\u0022" + " " + link;
                     }
                     if (!KonsooliNäha.Checked)
                     {
@@ -121,7 +170,7 @@ namespace Free_Tärn_YouTube_converter
                     }
                     if (!string.IsNullOrWhiteSpace(ffmpeg) && !string.IsNullOrWhiteSpace(YTdl))
                     {
-                        convert.StartInfo.Arguments = ; //siit edasi teha
+                        convert.StartInfo.Arguments = ""; //siit edasi teha
                     }
 
                     try
@@ -250,6 +299,22 @@ namespace Free_Tärn_YouTube_converter
                     MessageBox.Show("ffmpeg ja ffprobe ei leitud");
                 }
             }
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(path))
+            {
+                System.Diagnostics.Process.Start(path);
+            }
+            else
+            {
+                MessageBox.Show("Palun valige faili allalaadimise asukoht.");
+            }
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("cant touch this");
         }
     }
 }

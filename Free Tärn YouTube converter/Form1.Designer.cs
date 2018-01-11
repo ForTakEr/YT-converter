@@ -41,6 +41,8 @@
             this.KonsooliNäha = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.ResourceDirectory = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // FormatList
@@ -165,6 +167,23 @@
             this.ResourceDirectory.Text = "Choose";
             this.ResourceDirectory.UseVisualStyleBackColor = true;
             this.ResourceDirectory.Click += new System.EventHandler(this.ResourceDirectory_Click);
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(164, 148);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(69, 23);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "Asukoht";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(250, 148);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(132, 23);
+            this.progressBar1.TabIndex = 11;
+            this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click);
             // 
             // Form1
             // 
@@ -173,6 +192,9 @@
             this.ClientSize = new System.Drawing.Size(394, 227);
             this.Controls.Add(this.ResourceDirectory);
             this.Controls.Add(this.label4);
+            this.ClientSize = new System.Drawing.Size(394, 183);
+            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.KonsooliNäha);
             this.Controls.Add(this.NimeBox);
             this.Controls.Add(this.label3);
@@ -206,6 +228,8 @@
         private System.Windows.Forms.CheckBox KonsooliNäha;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button ResourceDirectory;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 
