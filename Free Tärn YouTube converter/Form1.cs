@@ -21,6 +21,8 @@ namespace Free_Tärn_YouTube_converter
         public string kõik;
         public string failiNimi;
         public string path;
+        public string YTdl;
+        public string ffmpeg;
 
         public Form1()
         {
@@ -28,11 +30,20 @@ namespace Free_Tärn_YouTube_converter
             FormatList.Items.Add("mp4");
             FormatList.Items.Add("m4a");
             FormatList.Items.Add("webm");
+            FormatList.Items.Add("wav");
+            FormatList.Items.Add("mp3");
         }
 
         private void FormatList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            if (Convert.ToString(FormatList.SelectedItem) == "mp3" || Convert.ToString(FormatList.SelectedItem) == "wav")
+            {
+                if (string.IsNullOrWhiteSpace(ffmpeg))
+                {
+                    MessageBox.Show("Selleks on vaja tõmmata ffmpeg ja ffprobe");
+                    FormatList.Text = "";
+                }
+            }
         }
 
         private void LinkBox_TextChanged(object sender, EventArgs e)
@@ -153,6 +164,14 @@ namespace Free_Tärn_YouTube_converter
                         convert.StartInfo.UseShellExecute = false;
                         convert.StartInfo.CreateNoWindow = true; 
                     }
+                    if (!string.IsNullOrWhiteSpace(YTdl))
+                    {
+                        convert.StartInfo.FileName = YTdl;
+                    }
+                    if (!string.IsNullOrWhiteSpace(ffmpeg) && !string.IsNullOrWhiteSpace(YTdl))
+                    {
+                        convert.StartInfo.Arguments = ""; //siit edasi teha
+                    }
 
                     try
                     {
@@ -249,6 +268,38 @@ namespace Free_Tärn_YouTube_converter
 
         }
 
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ResourceDirectory_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                string folderName = folderBrowserDialog1.SelectedPath;
+                if (File.Exists(Path.Combine(folderName, "youtube-dl.exe")))
+                {
+                    YTdl = Path.Combine(folderName, "youtube-dl.exe");
+                    MessageBox.Show("Youtube-dl leitud");
+                }
+                else
+                {
+                    MessageBox.Show("YouTube-dl ei leitud sealt pathist");
+                }
+                if (File.Exists(Path.Combine(folderName, "ffmpeg.exe")) && File.Exists(Path.Combine(folderName, "ffprobe.exe")))
+                {
+                    ffmpeg = Path.Combine(folderName, "ffmpeg.exe");
+                    MessageBox.Show("ffmpeg ja ffprobe leitud");
+                }
+                else
+                {
+                    MessageBox.Show("ffmpeg ja ffprobe ei leitud");
+                }
+            }
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(path))
