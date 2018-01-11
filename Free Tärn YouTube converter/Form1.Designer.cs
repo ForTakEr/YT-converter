@@ -200,6 +200,9 @@
             this.Text = "YouTube video converter";
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.AllowDrop = true;
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(Form1_DragEnter);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(Form1_DragDrop);
 
         }
 

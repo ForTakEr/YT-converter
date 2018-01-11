@@ -23,6 +23,7 @@ namespace Free_Tärn_YouTube_converter
         public string path;
         public string YTdl;
         public string ffmpeg;
+        public string TXTFail;
 
         public Form1()
         {
@@ -126,7 +127,7 @@ namespace Free_Tärn_YouTube_converter
                         break;
                 }
             }
-            if (!string.IsNullOrWhiteSpace(link) && !string.IsNullOrWhiteSpace(formaat))
+            if (!string.IsNullOrWhiteSpace(link) || !string.IsNullOrWhiteSpace(TXTFail) && !string.IsNullOrWhiteSpace(formaat))
             {
                 if (string.IsNullOrWhiteSpace(path))
                 {
@@ -184,6 +185,17 @@ namespace Free_Tärn_YouTube_converter
                             }
                         }
                     }
+                    if (!string.IsNullOrWhiteSpace(TXTFail))
+                    {
+                        if (formaat == "wav" || formaat == "mp3" || formaat == "m4a")
+                        {
+                            convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " -a " + TXTFail; 
+                        }
+                        else
+                        {
+                            convert.StartInfo.Arguments = "-f " + index + " -a " + TXTFail;
+                        }
+                    }
 
                     try
                     {
@@ -196,27 +208,38 @@ namespace Free_Tärn_YouTube_converter
                         throw;
                     }
 
-                    if (!string.IsNullOrWhiteSpace(NimeBox.Text))
+                    if (string.IsNullOrWhiteSpace(TXTFail))
                     {
-                        if (File.Exists(path + @"\" + failiNimi + "." + formaat))
+                        if (!string.IsNullOrWhiteSpace(NimeBox.Text))
                         {
-                            MessageBox.Show("Teie video on convertitud");
-                            LinkBox.Text = "";
-                            FormatList.ResetText();
-                            NimeBox.Text = "";
-                            break;
+                            if (File.Exists(path + @"\" + failiNimi + "." + formaat))
+                            {
+                                MessageBox.Show("Teie video on convertitud");
+                                LinkBox.Text = "";
+                                FormatList.ResetText();
+                                NimeBox.Text = "";
+                                break;
+                            }
                         }
+                        else
+                        {
+                            if (File.Exists(path + @"\" + failiNimi))
+                            {
+                                MessageBox.Show("Teie video on convertitud");
+                                LinkBox.Text = "";
+                                FormatList.ResetText();
+                                NimeBox.Text = "";
+                                break;
+                            }
+                        } 
                     }
                     else
                     {
-                        if (File.Exists(path + @"\" + failiNimi))
-                        {
-                            MessageBox.Show("Teie video on convertitud");
-                            LinkBox.Text = "";
-                            FormatList.ResetText();
-                            NimeBox.Text = "";
-                            break;
-                        }
+                        MessageBox.Show("Teie videod on convertitud");
+                        LinkBox.Text = "";
+                        FormatList.ResetText();
+                        NimeBox.Text = "";
+                        break;
                     }
                 }
 
@@ -298,6 +321,19 @@ namespace Free_Tärn_YouTube_converter
             else
             {
                 MessageBox.Show("Palun valige faili allalaadimise asukoht.");
+            }
+        }
+        void Form1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+        }
+
+        void Form1_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            foreach (string filePath in files)
+            {
+                TXTFail = filePath;
             }
         }
     }
