@@ -75,7 +75,7 @@ namespace Free_Tärn_YouTube_converter
         }
 
         private void Tõmba_Click(object sender, EventArgs e)
-        {           
+        {
             int i = 1;
             formaat = Convert.ToString(FormatList.SelectedItem);
             if (formaat == "mp4")
@@ -95,6 +95,11 @@ namespace Free_Tärn_YouTube_converter
             if (formaat == "m4a")
             {
                 index = 140;
+            }
+            if (File.Exists("ffprobe.exe") && File.Exists("ffmpeg.exe"))
+            {
+                ffmpeg = "olemas";
+                YTdl = Path.Combine(Directory.GetCurrentDirectory(), "youtube-dl.exe");
             }
             
             if (!string.IsNullOrWhiteSpace(link) || !string.IsNullOrWhiteSpace(TXTFail) && !string.IsNullOrWhiteSpace(formaat))
