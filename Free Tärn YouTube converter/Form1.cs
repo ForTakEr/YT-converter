@@ -156,8 +156,9 @@ namespace Free_Tärn_YouTube_converter
                         fileName.Start();
                         failiNimi = fileName.StandardOutput.ReadToEnd();
                         fileName.WaitForExit();
-                        failiNimi.Replace("\n", "");
-                        convert.StartInfo.Arguments = "-f " + index + " -o " + "\u0022" + path + @"\" + failiNimi.Replace("\n", "") + "\u0022" + " " + link;
+                        failiNimi = failiNimi.Replace("\n", "");
+                        failiNimi = failiNimi.Replace(".mp4", "." + formaat);
+                        convert.StartInfo.Arguments = "-f " + index + " -o " + "\u0022" + path + @"\" + failiNimi + "\u0022" + " " + link;
                     }
                     if (!KonsooliNäha.Checked)
                     {
