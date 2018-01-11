@@ -136,7 +136,7 @@ namespace Free_Tärn_YouTube_converter
                 {
                     var convert = new Process();
                     convert.StartInfo.FileName = "youtube-dl.exe";
-                    if (!string.IsNullOrWhiteSpace(failiNimi))
+                    if (!string.IsNullOrWhiteSpace(NimeBox.Text))
                     {
                         convert.StartInfo.Arguments = "-f " + index + " -o " + "\u0022" + path + @"\" + failiNimi + "." + formaat + "\u0022" + " " + link; 
                     }
@@ -172,7 +172,15 @@ namespace Free_Tärn_YouTube_converter
                     {
                         if (formaat == "wav" || formaat == "mp3" || formaat == "m4a")
                         {
-                            convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " --output " + "\u0022" + path + @"\" + failiNimi.Replace("\n", "") + "." + formaat + "\u0022" + " " + link;
+                            if (!string.IsNullOrWhiteSpace(NimeBox.Text))
+                            {
+                                convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " --output " + "\u0022" + path + @"\" + failiNimi.Replace("\n", "") + "." + formaat + "\u0022" + " " + link; 
+                            }
+                            else
+                            {
+                                convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " " + link;
+                                failiNimi = failiNimi.Replace(".mp4", "." + formaat);
+                            }
                         }
                     }
 
