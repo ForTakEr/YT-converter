@@ -50,7 +50,7 @@
             this.FormatList.Location = new System.Drawing.Point(13, 33);
             this.FormatList.Name = "FormatList";
             this.FormatList.Size = new System.Drawing.Size(121, 21);
-            this.FormatList.TabIndex = 2;
+            this.FormatList.TabIndex = 1;
             this.FormatList.SelectedIndexChanged += new System.EventHandler(this.FormatList_SelectedIndexChanged);
             // 
             // label1
@@ -67,7 +67,7 @@
             this.Tõmba.Location = new System.Drawing.Point(13, 72);
             this.Tõmba.Name = "Tõmba";
             this.Tõmba.Size = new System.Drawing.Size(75, 23);
-            this.Tõmba.TabIndex = 3;
+            this.Tõmba.TabIndex = 2;
             this.Tõmba.Text = "Tõmba";
             this.Tõmba.UseVisualStyleBackColor = true;
             this.Tõmba.Click += new System.EventHandler(this.Tõmba_Click);
@@ -114,7 +114,7 @@
             this.button1.Location = new System.Drawing.Point(356, 33);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(26, 21);
-            this.button1.TabIndex = 4;
+            this.button1.TabIndex = 5;
             this.button1.Text = "...";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -133,7 +133,7 @@
             this.NimeBox.Location = new System.Drawing.Point(164, 89);
             this.NimeBox.Name = "NimeBox";
             this.NimeBox.Size = new System.Drawing.Size(186, 20);
-            this.NimeBox.TabIndex = 1;
+            this.NimeBox.TabIndex = 4;
             this.NimeBox.TextChanged += new System.EventHandler(this.NimeBox_TextChanged);
             // 
             // KonsooliNäha
@@ -162,7 +162,7 @@
             this.ResourceDirectory.Location = new System.Drawing.Point(164, 152);
             this.ResourceDirectory.Name = "ResourceDirectory";
             this.ResourceDirectory.Size = new System.Drawing.Size(75, 23);
-            this.ResourceDirectory.TabIndex = 11;
+            this.ResourceDirectory.TabIndex = 3;
             this.ResourceDirectory.Text = "Choose";
             this.ResourceDirectory.UseVisualStyleBackColor = true;
             this.ResourceDirectory.Click += new System.EventHandler(this.ResourceDirectory_Click);
@@ -177,29 +177,13 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-<<<<<<< HEAD
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(250, 152);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(132, 23);
-            this.progressBar1.TabIndex = 11;
-            this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click);
-            // 
-=======
->>>>>>> d34482b6faf3c3686640dee58c746ce9bd9bd5f6
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(394, 195);
+            this.ClientSize = new System.Drawing.Size(394, 188);
             this.Controls.Add(this.ResourceDirectory);
             this.Controls.Add(this.label4);
-<<<<<<< HEAD
-            this.Controls.Add(this.progressBar1);
-=======
-            this.ClientSize = new System.Drawing.Size(394, 183);
->>>>>>> d34482b6faf3c3686640dee58c746ce9bd9bd5f6
             this.Controls.Add(this.button2);
             this.Controls.Add(this.KonsooliNäha);
             this.Controls.Add(this.NimeBox);
