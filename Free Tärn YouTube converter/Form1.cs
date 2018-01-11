@@ -260,5 +260,10 @@ namespace Free_Tärn_YouTube_converter
                 MessageBox.Show("Palun valige faili allalaadimise asukoht.");
             }
         }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("cant touch this");
+        }
     }
 }
