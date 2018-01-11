@@ -39,6 +39,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.NimeBox = new System.Windows.Forms.TextBox();
             this.KonsooliNäha = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.ResourceDirectory = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // FormatList
@@ -144,11 +146,33 @@
             this.KonsooliNäha.UseVisualStyleBackColor = true;
             this.KonsooliNäha.CheckedChanged += new System.EventHandler(this.KonsooliNäha_CheckedChanged);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(10, 171);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(209, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Vali youtube-dl või ffmpeg/ffprobe directory";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // ResourceDirectory
+            // 
+            this.ResourceDirectory.Location = new System.Drawing.Point(12, 192);
+            this.ResourceDirectory.Name = "ResourceDirectory";
+            this.ResourceDirectory.Size = new System.Drawing.Size(75, 23);
+            this.ResourceDirectory.TabIndex = 11;
+            this.ResourceDirectory.Text = "Choose";
+            this.ResourceDirectory.UseVisualStyleBackColor = true;
+            this.ResourceDirectory.Click += new System.EventHandler(this.ResourceDirectory_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(394, 161);
+            this.ClientSize = new System.Drawing.Size(394, 227);
+            this.Controls.Add(this.ResourceDirectory);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.KonsooliNäha);
             this.Controls.Add(this.NimeBox);
             this.Controls.Add(this.label3);
@@ -180,6 +204,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox NimeBox;
         private System.Windows.Forms.CheckBox KonsooliNäha;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button ResourceDirectory;
     }
 }
 
