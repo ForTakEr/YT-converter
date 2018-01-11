@@ -35,13 +35,17 @@ namespace Free_Tärn_YouTube_converter
             FormatList.Items.Add("m4a");
             FormatList.Items.Add("wav");
             FormatList.Items.Add("mp3");
+            if (File.Exists("ffmpeg.exe"))
+            {
+                ffmpeg = Path.Combine(Directory.GetCurrentDirectory(), "ffmpeg.exe");
+            }
         }
 
         private void FormatList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Convert.ToString(FormatList.SelectedItem) == "mp3" || Convert.ToString(FormatList.SelectedItem) == "wav")
             {
-                if (string.IsNullOrWhiteSpace(ffmpeg) || !File.Exists("ffmpeg.exe"))
+                if (string.IsNullOrWhiteSpace(ffmpeg) || !File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "ffmpeg.exe")))
                 {
                     MessageBox.Show("Selleks on vaja tõmmata ffmpeg ja ffprobe");
                     FormatList.Text = "";
@@ -199,6 +203,10 @@ namespace Free_Tärn_YouTube_converter
                                     Protsenttekst = kõik.Substring(11, 6);
                                     //Protsenttekst = Regex.Replace(Protsenttekst, "[^0-9.]", "");
                                     Protsenttekst = Regex.Match(Protsenttekst, @"\d+").Value;
+                                    if (Protsenttekst == "")
+                                    {
+                                        break;
+                                    }
                                     protsent = Int32.Parse(Protsenttekst);
                                     progressBar1.Value = protsent;
                                 }
