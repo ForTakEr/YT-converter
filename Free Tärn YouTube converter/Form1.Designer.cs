@@ -39,6 +39,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.NimeBox = new System.Windows.Forms.TextBox();
             this.KonsooliNäha = new System.Windows.Forms.CheckBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // FormatList
@@ -144,11 +145,22 @@
             this.KonsooliNäha.UseVisualStyleBackColor = true;
             this.KonsooliNäha.CheckedChanged += new System.EventHandler(this.KonsooliNäha_CheckedChanged);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(164, 148);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(69, 23);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "Asukoht";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(394, 161);
+            this.ClientSize = new System.Drawing.Size(394, 183);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.KonsooliNäha);
             this.Controls.Add(this.NimeBox);
             this.Controls.Add(this.label3);
@@ -180,6 +192,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox NimeBox;
         private System.Windows.Forms.CheckBox KonsooliNäha;
+        private System.Windows.Forms.Button button2;
     }
 }
 
