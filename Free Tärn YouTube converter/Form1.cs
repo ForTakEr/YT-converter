@@ -181,69 +181,76 @@ namespace Free_Tärn_YouTube_converter
                             convert.StartInfo.Arguments = "-f " + index + " -a " + TXTFail;
                         }
                     }
-                    if (!KonsooliNäha.Checked)
+                    if (File.Exists(path + @"\" + failiNimi))
                     {
-                        convert.StartInfo.RedirectStandardOutput = true;
-                        convert.Start();
-                        for (int a = 0; a < 6; a++)
+                        if (!KonsooliNäha.Checked)
                         {
-                            kõik = convert.StandardOutput.ReadLine();
-                        }
-                        while (protsent != 100)
-                        {
-                            kõik = convert.StandardOutput.ReadLine();
-                            if (kõik != null)
+                            convert.StartInfo.RedirectStandardOutput = true;
+                            convert.Start();
+                            for (int a = 0; a < 6; a++)
                             {
-                                Protsenttekst = kõik.Substring(11, 6);
-                                //Protsenttekst = Regex.Replace(Protsenttekst, "[^0-9.]", "");
-                                Protsenttekst = Regex.Match(Protsenttekst, @"\d+").Value;
-                                protsent = Int32.Parse(Protsenttekst);
-                                progressBar1.Value = protsent;
+                                kõik = convert.StandardOutput.ReadLine();
                             }
-                        }
-                        convert.WaitForExit(); 
-                    }
-                    else
-                    {
-                        convert.Start();
-                        convert.WaitForExit();
-                    }
-
-                    if (string.IsNullOrWhiteSpace(TXTFail))
-                    {
-                        if (!string.IsNullOrWhiteSpace(NimeBox.Text))
-                        {
-                            if (File.Exists(path + @"\" + failiNimi + "." + formaat))
+                            while (protsent != 100)
                             {
-                                MessageBox.Show("Teie video on convertitud");
-                                LinkBox.Text = "";
-                                FormatList.ResetText();
-                                NimeBox.Text = "";
-                                progressBar1.Value = 0;
-                                break;
+                                kõik = convert.StandardOutput.ReadLine();
+                                if (kõik != null)
+                                {
+                                    Protsenttekst = kõik.Substring(11, 6);
+                                    //Protsenttekst = Regex.Replace(Protsenttekst, "[^0-9.]", "");
+                                    Protsenttekst = Regex.Match(Protsenttekst, @"\d+").Value;
+                                    protsent = Int32.Parse(Protsenttekst);
+                                    progressBar1.Value = protsent;
+                                }
+                            }
+                            convert.WaitForExit();
+                        }
+                        else
+                        {
+                            convert.Start();
+                            convert.WaitForExit();
+                        }
+
+                        if (string.IsNullOrWhiteSpace(TXTFail))
+                        {
+                            if (!string.IsNullOrWhiteSpace(NimeBox.Text))
+                            {
+                                if (File.Exists(path + @"\" + failiNimi + "." + formaat))
+                                {
+                                    MessageBox.Show("Teie video on convertitud");
+                                    LinkBox.Text = "";
+                                    FormatList.ResetText();
+                                    NimeBox.Text = "";
+                                    progressBar1.Value = 0;
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                if (File.Exists(path + @"\" + failiNimi))
+                                {
+                                    MessageBox.Show("Teie video on convertitud");
+                                    LinkBox.Text = "";
+                                    FormatList.ResetText();
+                                    NimeBox.Text = "";
+                                    progressBar1.Value = 0;
+                                    break;
+                                }
                             }
                         }
                         else
                         {
-                            if (File.Exists(path + @"\" + failiNimi))
-                            {
-                                MessageBox.Show("Teie video on convertitud");
-                                LinkBox.Text = "";
-                                FormatList.ResetText();
-                                NimeBox.Text = "";
-                                progressBar1.Value = 0;
-                                break;
-                            }
+                            MessageBox.Show("Teie videod on convertitud");
+                            LinkBox.Text = "";
+                            FormatList.ResetText();
+                            NimeBox.Text = "";
+                            progressBar1.Value = 0;
+                            break;
                         } 
                     }
                     else
                     {
-                        MessageBox.Show("Teie videod on convertitud");
-                        LinkBox.Text = "";
-                        FormatList.ResetText();
-                        NimeBox.Text = "";
-                        progressBar1.Value = 0;
-                        break;
+                        MessageBox.Show("See video/audio on teil juba seal olemas");
                     }
                 }
 
@@ -251,6 +258,7 @@ namespace Free_Tärn_YouTube_converter
             else
             {
                 MessageBox.Show("Palun täida kõik väljad");
+                break;
             }
         }
 
