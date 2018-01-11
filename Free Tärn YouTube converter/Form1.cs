@@ -251,6 +251,7 @@ namespace Free_Tärn_YouTube_converter
                     else
                     {
                         MessageBox.Show("See video/audio on teil juba seal olemas");
+                        break;
                     }
                 }
 
@@ -258,7 +259,6 @@ namespace Free_Tärn_YouTube_converter
             else
             {
                 MessageBox.Show("Palun täida kõik väljad");
-                break;
             }
         }
 
