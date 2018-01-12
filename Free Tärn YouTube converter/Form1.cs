@@ -106,94 +106,94 @@ namespace Free_Tärn_YouTube_converter
                     {
                         var convert = new Process();
                         convert.StartInfo.FileName = "youtube-dl.exe";
-                        while (true) //selle while tegin, sest, kui mp4 tõmmata ja on ainult alla 720p võimalus, siis see muudab indexi ja proovib uuesti tõmmata
+                        if (!string.IsNullOrWhiteSpace(NimeBox.Text))
                         {
-                            if (!string.IsNullOrWhiteSpace(NimeBox.Text))
+                            //fuck me
+                        }
+                        else
+                        {
+                            if (!link.Contains("playlist"))
                             {
-                                //fuck me
-                            }
-                            else
-                            {
-                                if (!link.Contains("playlist"))
+                                var fileName = new Process
                                 {
-                                    var fileName = new Process
+                                    StartInfo = new ProcessStartInfo
                                     {
-                                        StartInfo = new ProcessStartInfo
-                                        {
-                                            FileName = "youtube-dl.exe",
-                                            Arguments = "--get-filename " + link,
-                                            UseShellExecute = false,
-                                            RedirectStandardOutput = true,
-                                            CreateNoWindow = true
-                                        }
-                                    };
-                                    fileName.Start();
-                                    failiNimi = fileName.StandardOutput.ReadToEnd();
-                                    fileName.WaitForExit();
-                                    failiNimi = failiNimi.Replace("\n", "");
-                                    convert.StartInfo.Arguments = "-f " + index + " -o " + "\u0022" + path + @"\" + failiNimi + "\u0022" + " " + link; 
-                                }
-                            }
-                            if (!KonsooliNäha.Checked)
-                            {
-                                convert.StartInfo.UseShellExecute = false;
-                                convert.StartInfo.CreateNoWindow = true;
-                            }
-                            if (valeLink)
-                            {
-                                break;
-                            }
-                            if (!string.IsNullOrWhiteSpace(YTdl))
-                            {
-                                convert.StartInfo.FileName = YTdl;
-                            }
-                            if (!link.Contains("playlist") && NimeBox.Text == "" && path != Directory.GetCurrentDirectory())
-                            {
-                                if (!string.IsNullOrWhiteSpace(ffmpeg) && !string.IsNullOrWhiteSpace(YTdl))
-                                {
-                                    if (formaat == "wav" || formaat == "mp3" || formaat == "m4a")
-                                    {
-                                        if (!string.IsNullOrWhiteSpace(NimeBox.Text))
-                                        {
-                                            convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " --output " + "\u0022" + path + @"\" + failiNimi.Replace("\n", "") + ".mp4" + "\u0022" + " " + link;
-                                        }
-                                        else
-                                        {
-                                            convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " -o " + "\u0022" + path + @"\" + failiNimi + "\u0022" + " " + link;
-                                            failiNimi = failiNimi.Replace(".mp4", "." + formaat);
-                                        }
+                                        FileName = "youtube-dl.exe",
+                                        Arguments = "--get-filename " + link,
+                                        UseShellExecute = false,
+                                        RedirectStandardOutput = true,
+                                        CreateNoWindow = true
                                     }
-                                }
-                                if (!string.IsNullOrWhiteSpace(TXTFail))
+                                };
+                                fileName.Start();
+                                failiNimi = fileName.StandardOutput.ReadToEnd();
+                                fileName.WaitForExit();
+                                failiNimi = failiNimi.Replace("\n", "");
+                                convert.StartInfo.Arguments = "-f " + index + " -o " + "\u0022" + path + @"\" + failiNimi + "\u0022" + " " + link; 
+                            }
+                        }
+                        if (!KonsooliNäha.Checked)
+                        {
+                            convert.StartInfo.UseShellExecute = false;
+                            convert.StartInfo.CreateNoWindow = true;
+                        }
+                        if (valeLink)
+                        {
+                            break;
+                        }
+                        if (!string.IsNullOrWhiteSpace(YTdl))
+                        {
+                            convert.StartInfo.FileName = YTdl;
+                        }
+                        if (!link.Contains("playlist") && NimeBox.Text == "" && path != Directory.GetCurrentDirectory())
+                        {
+                            if (!string.IsNullOrWhiteSpace(ffmpeg) && !string.IsNullOrWhiteSpace(YTdl))
+                            {
+                                if (formaat == "wav" || formaat == "mp3" || formaat == "m4a")
                                 {
-                                    if (formaat == "wav" || formaat == "mp3" || formaat == "m4a")
+                                    if (!string.IsNullOrWhiteSpace(NimeBox.Text))
                                     {
-                                        convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " -a " + TXTFail;
+                                        convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " --output " + "\u0022" + path + @"\" + failiNimi.Replace("\n", "") + ".mp4" + "\u0022" + " " + link;
                                     }
                                     else
                                     {
-                                        convert.StartInfo.Arguments = "-f " + index + " -a " + TXTFail;
+                                        convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " -o " + "\u0022" + path + @"\" + failiNimi + "\u0022" + " " + link;
+                                        failiNimi = failiNimi.Replace(".mp4", "." + formaat);
                                     }
-                                } 
-                            }
-                            else
-                            {
-                                if (NimeBox.Text == "")
-                                {
-                                    convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " " + link; 
                                 }
-                                else if (formaat == "mp4")
+                            }
+                            if (!string.IsNullOrWhiteSpace(TXTFail))
+                            {
+                                if (formaat == "wav" || formaat == "mp3" || formaat == "m4a")
                                 {
-                                    convert.StartInfo.Arguments = "-f " + index + " -o " + "\u0022" + path + @"\" + failiNimi + ".mp4" + "\u0022" + " " + link;
+                                    convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " -a " + TXTFail;
                                 }
                                 else
                                 {
-                                    convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " --output " + "\u0022" + path + @"\" + failiNimi.Replace("\n", "") + ".mp4" + "\u0022" + " " + link;
+                                    convert.StartInfo.Arguments = "-f " + index + " -a " + TXTFail;
                                 }
+                            } 
+                        }
+                        else
+                        {
+                            if (NimeBox.Text == "")
+                            {
+                                convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " " + link; 
                             }
-                            failiNimi = failiNimi.Replace(".webm", "." + formaat);
-                            failiNimi = failiNimi.Replace(".mp4", "." + formaat);
-                            if (!File.Exists(path + @"\" + failiNimi))
+                            else if (formaat == "mp4")
+                            {
+                                convert.StartInfo.Arguments = "-f " + index + " -o " + "\u0022" + path + @"\" + failiNimi + ".mp4" + "\u0022" + " " + link;
+                            }
+                            else
+                            {
+                                convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " --output " + "\u0022" + path + @"\" + failiNimi.Replace("\n", "") + ".mp4" + "\u0022" + " " + link;
+                            }
+                        }
+                        failiNimi = failiNimi.Replace(".webm", "." + formaat);
+                        failiNimi = failiNimi.Replace(".mp4", "." + formaat);
+                        if (!File.Exists(path + @"\" + failiNimi))
+                        {
+                            while (true)
                             {
                                 if (!KonsooliNäha.Checked)
                                 {
@@ -204,7 +204,7 @@ namespace Free_Tärn_YouTube_converter
                                         for (int a = 0; a < 6; a++)
                                         {
                                             kõik = convert.StandardOutput.ReadLine();
-                                        } 
+                                        }
                                     }
                                     else
                                     {
@@ -279,7 +279,12 @@ namespace Free_Tärn_YouTube_converter
                                         protsent = 0;
                                     }
                                     convert.WaitForExit();
+                                    if (File.Exists(path + @"\" + failiNimi) || File.Exists(path + @"\" + failiNimi + "." + formaat))
+                                    {
+                                        break; 
+                                    }
                                 }
+
                                 else
                                 {
                                     while (true)
@@ -306,51 +311,52 @@ namespace Free_Tärn_YouTube_converter
                                             convert.StartInfo.Arguments = convert.StartInfo.Arguments = "-f " + index + " -o " + "\u0022" + path + @"\" + failiNimi + ".mp4" + "\u0022" + " " + link;
                                         }
                                     }
+                                    break;
                                 }
+                            }
 
-                                if (string.IsNullOrWhiteSpace(TXTFail) && !link.Contains("playlist"))
+                            if (string.IsNullOrWhiteSpace(TXTFail) && !link.Contains("playlist"))
+                            {
+                                if (!string.IsNullOrWhiteSpace(NimeBox.Text))
                                 {
-                                    if (!string.IsNullOrWhiteSpace(NimeBox.Text))
+                                    if (File.Exists(path + @"\" + failiNimi + "." + formaat))
                                     {
-                                        if (File.Exists(path + @"\" + failiNimi + "." + formaat))
-                                        {
-                                            MessageBox.Show("Teie video on alla laetud");
-                                            LinkBox.Text = "";
-                                            FormatList.ResetText();
-                                            NimeBox.Text = "";
-                                            progressBar1.Value = 0;
-                                            break;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (File.Exists(path + @"\" + failiNimi) || File.Exists(path + @"\" + failiNimi + "." + formaat))
-                                        {
-                                            MessageBox.Show("Teie video on alla laetud");
-                                            LinkBox.Text = "";
-                                            FormatList.ResetText();
-                                            NimeBox.Text = "";
-                                            progressBar1.Value = 0;
-                                            break;
-                                        }
+                                        MessageBox.Show("Teie video on alla laetud");
+                                        LinkBox.Text = "";
+                                        FormatList.ResetText();
+                                        NimeBox.Text = "";
+                                        progressBar1.Value = 0;
+                                        break;
                                     }
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Teie videod on alla laetud");
-                                    LinkBox.Text = "";
-                                    FormatList.ResetText();
-                                    NimeBox.Text = "";
-                                    progressBar1.Value = 0;
-                                    break;
+                                    if (File.Exists(path + @"\" + failiNimi) || File.Exists(path + @"\" + failiNimi + "." + formaat))
+                                    {
+                                        MessageBox.Show("Teie video on alla laetud");
+                                        LinkBox.Text = "";
+                                        FormatList.ResetText();
+                                        NimeBox.Text = "";
+                                        progressBar1.Value = 0;
+                                        break;
+                                    }
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("See video/audio on teil juba seal olemas");
+                                MessageBox.Show("Teie videod on alla laetud");
+                                LinkBox.Text = "";
+                                FormatList.ResetText();
+                                NimeBox.Text = "";
                                 progressBar1.Value = 0;
                                 break;
                             }
+                        }
+                        else
+                        {
+                            MessageBox.Show("See video/audio on teil juba seal olemas");
+                            progressBar1.Value = 0;
+                            break;
                         }
                         break;
                     }
