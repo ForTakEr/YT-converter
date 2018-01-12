@@ -238,22 +238,11 @@ namespace Free_Tärn_YouTube_converter
                                         while (protsent != 100)
                                         {
                                             kõik = convert.StandardOutput.ReadLine();
-                                            if (kõik != null || link.Contains("playlist"))
+                                            if (kõik != null)
                                             {
                                                 Protsenttekst = kõik.Substring(11, 6);
                                                 //Protsenttekst = Regex.Replace(Protsenttekst, "[^0-9.]", "");
                                                 Protsenttekst = Regex.Match(Protsenttekst, @"\d+").Value;
-                                                if (Protsenttekst == "")
-                                                {
-                                                    if (link.Contains("playlist"))
-                                                    {
-                                                        Protsenttekst = "1";
-                                                    }
-                                                    else
-                                                    {
-                                                        break;
-                                                    }
-                                                }
                                                 protsent = Int32.Parse(Protsenttekst);
                                                 progressBar1.Value = protsent;
                                             }
@@ -273,7 +262,19 @@ namespace Free_Tärn_YouTube_converter
                                                             break;
                                                     }
                                                 }
+                                                else
+                                                {
+                                                    MessageBox.Show("Miski läks valesti");
+                                                    break;
+                                                }
                                                 break;
+                                            }
+                                            if (protsent == 100 && link.Contains("playlist"))
+                                            {
+                                                for (int b = 0; b < 10; b++)
+                                                {
+                                                    kõik = convert.StandardOutput.ReadLine();
+                                                }
                                             }
                                         }
                                         protsent = 0;
@@ -284,10 +285,6 @@ namespace Free_Tärn_YouTube_converter
                                 {
                                     convert.Start();
                                     convert.WaitForExit();
-                                    if (File.Exists(path + @"\" + failiNimi + "." + formaat) || link.Contains("playlist"))
-                                    {
-                                        break;
-                                    }
                                 }
 
                                 if (string.IsNullOrWhiteSpace(TXTFail) || !link.Contains("playlist"))
