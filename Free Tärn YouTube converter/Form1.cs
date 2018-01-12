@@ -176,6 +176,14 @@ namespace Free_Tärn_YouTube_converter
                                 {
                                     convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " " + link; 
                                 }
+                                else if (formaat == "mp4")
+                                {
+                                    convert.StartInfo.Arguments = "-f " + index + " -o " + "\u0022" + path + @"\" + failiNimi + ".mp4" + "\u0022" + " " + link;
+                                }
+                                else
+                                {
+                                    convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " --output " + "\u0022" + path + @"\" + failiNimi.Replace("\n", "") + ".mp4" + "\u0022" + " " + link;
+                                }
                             }
                             if (!File.Exists(path + @"\" + failiNimi))
                             {
@@ -300,6 +308,7 @@ namespace Free_Tärn_YouTube_converter
                             else
                             {
                                 MessageBox.Show("See video/audio on teil juba seal olemas");
+                                progressBar1.Value = 0;
                                 break;
                             }
                         }
