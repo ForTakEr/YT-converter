@@ -264,7 +264,7 @@ namespace Free_Tärn_YouTube_converter
                                     convert.WaitForExit();
                                 }
 
-                                if (string.IsNullOrWhiteSpace(TXTFail) || !link.Contains("playlist"))
+                                if (string.IsNullOrWhiteSpace(TXTFail) && !link.Contains("playlist"))
                                 {
                                     if (!string.IsNullOrWhiteSpace(NimeBox.Text))
                                     {
