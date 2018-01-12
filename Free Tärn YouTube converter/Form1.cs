@@ -264,8 +264,30 @@ namespace Free_Tärn_YouTube_converter
                                 }
                                 else
                                 {
-                                    convert.Start();
-                                    convert.WaitForExit();
+                                    while (true)
+                                    {
+                                        convert.Start();
+                                        convert.WaitForExit();
+                                        if (File.Exists(path + @"\" + failiNimi) || File.Exists(path + @"\" + failiNimi + "." + formaat))
+                                        {
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            switch (i)
+                                            {
+                                                case 1: //720p
+                                                    index = 22;
+                                                    i++;
+                                                    break;
+                                                case 2: //360p
+                                                    index = 18;
+                                                    i++;
+                                                    break;
+                                            }
+                                            convert.StartInfo.Arguments = convert.StartInfo.Arguments = "-f " + index + " -o " + "\u0022" + path + @"\" + failiNimi + ".mp4" + "\u0022" + " " + link;
+                                        }
+                                    }
                                 }
 
                                 if (string.IsNullOrWhiteSpace(TXTFail) && !link.Contains("playlist"))
@@ -284,7 +306,7 @@ namespace Free_Tärn_YouTube_converter
                                     }
                                     else
                                     {
-                                        if (File.Exists(path + @"\" + failiNimi))
+                                        if (File.Exists(path + @"\" + failiNimi) || File.Exists(path + @"\" + failiNimi + "." + formaat))
                                         {
                                             MessageBox.Show("Teie video on alla laetud");
                                             LinkBox.Text = "";
