@@ -185,6 +185,8 @@ namespace Free_Tärn_YouTube_converter
                                     convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " --output " + "\u0022" + path + @"\" + failiNimi.Replace("\n", "") + ".mp4" + "\u0022" + " " + link;
                                 }
                             }
+                            failiNimi = failiNimi.Replace(".webm", "." + formaat);
+                            failiNimi = failiNimi.Replace(".mp4", "." + formaat);
                             if (!File.Exists(path + @"\" + failiNimi))
                             {
                                 if (!KonsooliNäha.Checked)
@@ -224,7 +226,15 @@ namespace Free_Tärn_YouTube_converter
                                                 Protsenttekst = kõik.Substring(11, 6);
                                                 //Protsenttekst = Regex.Replace(Protsenttekst, "[^0-9.]", "");
                                                 Protsenttekst = Regex.Match(Protsenttekst, @"\d+").Value;
-                                                protsent = Int32.Parse(Protsenttekst);
+                                                try
+                                                {
+                                                    protsent = Int32.Parse(Protsenttekst);
+                                                }
+                                                catch (Exception)
+                                                {
+                                                    MessageBox.Show("See fail juba eksisteerib");
+                                                    throw;
+                                                }
                                                 progressBar1.Value = protsent;
                                             }
                                             else
