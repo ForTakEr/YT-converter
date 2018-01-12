@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -57,29 +57,6 @@ namespace Free_Tärn_YouTube_converter
         private void LinkBox_TextChanged(object sender, EventArgs e)
         {
             link = LinkBox.Text;
-            //var proc = new Process
-            //{
-            //    StartInfo = new ProcessStartInfo
-            //    {
-            //        FileName = "youtube-dl.exe",
-            //        Arguments = "-F " + link,
-            //        UseShellExecute = false,
-            //        RedirectStandardOutput = true,
-            //        CreateNoWindow = true
-            //    }
-            //};
-            //try
-            //{
-            //    proc.Start();
-            //    kõik = proc.StandardOutput.ReadToEnd();
-            //    proc.WaitForExit();
-            //    FormatList.Text = kõik;
-            //}
-            //catch (Exception)
-            //{
-            //    MessageBox.Show("Youtube-dl ei leitud");
-            //    throw;
-            //}
         }
 
         private void Tõmba_Click(object sender, EventArgs e)
@@ -127,7 +104,7 @@ namespace Free_Tärn_YouTube_converter
                     {
                         var convert = new Process();
                         convert.StartInfo.FileName = "youtube-dl.exe";
-                        while (true)
+                        while (true) //selle while tegin, sest, kui mp4 tõmmata ja on ainult alla 720p võimalus, siis see muudab indexi ja proovib uuesti tõmmata
                         {
                             if (!string.IsNullOrWhiteSpace(NimeBox.Text))
                             {
@@ -160,7 +137,7 @@ namespace Free_Tärn_YouTube_converter
                                     failiNimi = failiNimi + "." + formaat;
                                     failiNimi = Regex.Replace(failiNimi, @"\s+", " ");
                                     convert.StartInfo.Arguments = "-f " + index + " -o " + "\u0022" + path + @"\" + failiNimi + "\u0022" + " " + link; 
-                                }
+                                };
                             }
                             if (!KonsooliNäha.Checked)
                             {
@@ -223,6 +200,9 @@ namespace Free_Tärn_YouTube_converter
                                         {
                                             kõik = convert.StandardOutput.ReadLine();
                                             if (a == 2)
+                                            Protsenttekst = kõik.Substring(11, 6);
+                                            Protsenttekst = Regex.Match(Protsenttekst, @"\d+").Value;
+                                            if (Protsenttekst == "")
                                             {
                                                 kõik = Regex.Match(kõik, @"\d+").Value;
                                                 playlistVideoNumber = Int32.Parse(kõik);
