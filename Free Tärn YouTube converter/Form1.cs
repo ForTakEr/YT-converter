@@ -141,7 +141,7 @@ namespace Free_Tärn_YouTube_converter
                             {
                                 convert.StartInfo.FileName = YTdl;
                             }
-                            if (!link.Contains("playlist") && NimeBox.Text != "" && path != Directory.GetCurrentDirectory())
+                            if (!link.Contains("playlist") && NimeBox.Text == "" && path != Directory.GetCurrentDirectory())
                             {
                                 if (!string.IsNullOrWhiteSpace(ffmpeg) && !string.IsNullOrWhiteSpace(YTdl))
                                 {
