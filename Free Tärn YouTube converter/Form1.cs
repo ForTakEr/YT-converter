@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -137,7 +137,7 @@ namespace Free_Tärn_YouTube_converter
                                     failiNimi = failiNimi + "." + formaat;
                                     failiNimi = Regex.Replace(failiNimi, @"\s+", " ");
                                     convert.StartInfo.Arguments = "-f " + index + " -o " + "\u0022" + path + @"\" + failiNimi + "\u0022" + " " + link; 
-                                };
+                                }
                             }
                             if (!KonsooliNäha.Checked)
                             {
@@ -200,9 +200,6 @@ namespace Free_Tärn_YouTube_converter
                                         {
                                             kõik = convert.StandardOutput.ReadLine();
                                             if (a == 2)
-                                            Protsenttekst = kõik.Substring(11, 6);
-                                            Protsenttekst = Regex.Match(Protsenttekst, @"\d+").Value;
-                                            if (Protsenttekst == "")
                                             {
                                                 kõik = Regex.Match(kõik, @"\d+").Value;
                                                 playlistVideoNumber = Int32.Parse(kõik);
