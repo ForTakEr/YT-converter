@@ -43,6 +43,7 @@
             this.ResourceDirectory = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // FormatList
@@ -186,6 +187,15 @@
             this.progressBar1.TabIndex = 11;
             this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(13, 190);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(0, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Click += new System.EventHandler(this.label5_Click);
+            // 
             // Form1
             // 
             this.AcceptButton = this.Tõmba;
@@ -193,6 +203,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(363, 238);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.ResourceDirectory);
             this.Controls.Add(this.label4);
@@ -235,6 +246,7 @@
         private System.Windows.Forms.Button ResourceDirectory;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label5;
     }
 }
 
