@@ -28,6 +28,7 @@ namespace Free_Tärn_YouTube_converter
         public string Protsenttekst;
         public int protsent;
         public int playlistVideoNumber;
+        public bool valeLink;
 
         public Form1()
         {
@@ -57,6 +58,7 @@ namespace Free_Tärn_YouTube_converter
         private void LinkBox_TextChanged(object sender, EventArgs e)
         {
             link = LinkBox.Text;
+            valeLink = !Uri.IsWellFormedUriString(link, UriKind.RelativeOrAbsolute);
         }
 
         private void Tõmba_Click(object sender, EventArgs e)
@@ -68,7 +70,7 @@ namespace Free_Tärn_YouTube_converter
             progressBar1.Visible = true;
             int i = 1;
             formaat = Convert.ToString(FormatList.SelectedItem);
-            if (formaat != "wav" && formaat != "mp3" || !string.IsNullOrWhiteSpace(ffmpeg) || File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "ffmpeg.exe")))
+            if ((formaat != "wav" && formaat != "mp3" || !string.IsNullOrWhiteSpace(ffmpeg) || File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "ffmpeg.exe"))) && !valeLink)
             {
                 if (formaat == "mp4")
                 {
@@ -136,6 +138,10 @@ namespace Free_Tärn_YouTube_converter
                             {
                                 convert.StartInfo.UseShellExecute = false;
                                 convert.StartInfo.CreateNoWindow = true;
+                            }
+                            if (valeLink)
+                            {
+                                break;
                             }
                             if (!string.IsNullOrWhiteSpace(YTdl))
                             {
@@ -255,7 +261,8 @@ namespace Free_Tärn_YouTube_converter
                                                 }
                                                 else
                                                 {
-                                                    MessageBox.Show("Miski läks valesti");
+                                                    MessageBox.Show("Link ei tööta");
+                                                    valeLink = true;
                                                     break;
                                                 }
                                                 break;
@@ -350,12 +357,19 @@ namespace Free_Tärn_YouTube_converter
                 }
                 else
                 {
-                    MessageBox.Show("Palun täida kõik väljad");
+                    MessageBox.Show("Palun täida kõik väljad ja tee kindlaks, et link on õige");
                 } 
             }
             else
             {
-                MessageBox.Show("Palun lisage ffmpeg ja ffprobe directory või pange see samasse folderisse, kus on see programm");
+                if (!valeLink)
+                {
+                    MessageBox.Show("Palun lisage ffmpeg ja ffprobe directory või pange see samasse folderisse, kus on see programm"); 
+                }
+                else
+                {
+                    MessageBox.Show("Sisestatud link ei tööta, palun asendage see millegi muuga");
+                }
             }
         }
 
