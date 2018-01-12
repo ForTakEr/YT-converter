@@ -284,13 +284,13 @@ namespace Free_Tärn_YouTube_converter
                                 {
                                     convert.Start();
                                     convert.WaitForExit();
-                                    if (File.Exists(path + @"\" + failiNimi + "." + formaat))
+                                    if (File.Exists(path + @"\" + failiNimi + "." + formaat) || link.Contains("playlist"))
                                     {
                                         break;
                                     }
                                 }
 
-                                if (string.IsNullOrWhiteSpace(TXTFail))
+                                if (string.IsNullOrWhiteSpace(TXTFail) || !link.Contains("playlist"))
                                 {
                                     if (!string.IsNullOrWhiteSpace(NimeBox.Text))
                                     {
