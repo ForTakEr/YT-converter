@@ -126,7 +126,7 @@ namespace Free_Tärn_YouTube_converter
                     {
                         var convert = new Process();
                         convert.StartInfo.FileName = "youtube-dl.exe";
-                        while (true)
+                        while (true) //selle while tegin, sest, kui mp4 tõmmata ja on ainult alla 720p võimalus, siis see muudab indexi ja proovib uuesti tõmmata
                         {
                             if (!string.IsNullOrWhiteSpace(NimeBox.Text))
                             {
@@ -147,6 +147,11 @@ namespace Free_Tärn_YouTube_converter
                                 };
                                 fileName.Start();
                                 failiNimi = fileName.StandardOutput.ReadToEnd();
+                                if (failiNimi == "")
+                                {
+                                    MessageBox.Show("Seda pole võimalik hetkel tõmmata");
+                                    break;
+                                }
                                 fileName.WaitForExit();
                                 failiNimi = failiNimi.Replace("\n", "");
                                 int indexNumber = failiNimi.IndexOf(".");
