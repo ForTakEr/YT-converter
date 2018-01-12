@@ -108,7 +108,7 @@ namespace Free_Tärn_YouTube_converter
                         {
                             if (!string.IsNullOrWhiteSpace(NimeBox.Text))
                             {
-                                convert.StartInfo.Arguments = "-f " + index + " -o " + "\u0022" + path + @"\" + failiNimi + "." + formaat + "\u0022" + " " + link;
+                                //fuck me
                             }
                             else
                             {
@@ -129,13 +129,6 @@ namespace Free_Tärn_YouTube_converter
                                     failiNimi = fileName.StandardOutput.ReadToEnd();
                                     fileName.WaitForExit();
                                     failiNimi = failiNimi.Replace("\n", "");
-                                    int indexNumber = failiNimi.IndexOf(".");
-                                    if (indexNumber > 0)
-                                    {
-                                        failiNimi = failiNimi.Substring(0, indexNumber);
-                                    }
-                                    failiNimi = failiNimi + "." + formaat;
-                                    failiNimi = Regex.Replace(failiNimi, @"\s+", " ");
                                     convert.StartInfo.Arguments = "-f " + index + " -o " + "\u0022" + path + @"\" + failiNimi + "\u0022" + " " + link; 
                                 }
                             }
@@ -148,7 +141,7 @@ namespace Free_Tärn_YouTube_converter
                             {
                                 convert.StartInfo.FileName = YTdl;
                             }
-                            if (!link.Contains("playlist"))
+                            if (!link.Contains("playlist") && NimeBox.Text != "" && path != Directory.GetCurrentDirectory())
                             {
                                 if (!string.IsNullOrWhiteSpace(ffmpeg) && !string.IsNullOrWhiteSpace(YTdl))
                                 {
@@ -156,7 +149,7 @@ namespace Free_Tärn_YouTube_converter
                                     {
                                         if (!string.IsNullOrWhiteSpace(NimeBox.Text))
                                         {
-                                            convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " --output " + "\u0022" + path + @"\" + failiNimi.Replace("\n", "") + "." + formaat + "\u0022" + " " + link;
+                                            convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " --output " + "\u0022" + path + @"\" + failiNimi.Replace("\n", "") + ".mp4" + "\u0022" + " " + link;
                                         }
                                         else
                                         {
@@ -179,7 +172,10 @@ namespace Free_Tärn_YouTube_converter
                             }
                             else
                             {
-                                convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " " + link;
+                                if (NimeBox.Text == "")
+                                {
+                                    convert.StartInfo.Arguments = "--extract-audio --audio-format " + formaat + " " + link; 
+                                }
                             }
                             if (!File.Exists(path + @"\" + failiNimi))
                             {
